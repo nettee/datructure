@@ -1,0 +1,13 @@
+namespace Stack {
+    struct Rep;
+    typedef Rep& stack;
+
+    stack create();
+    void destroy(stack s);
+
+    void push(char);
+    char pop();
+
+    //type representing overflow exceptions
+    class Overflow{}; 
+}
