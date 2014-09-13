@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include "seqlist_char.h"
 
 using namespace std;
@@ -30,7 +31,22 @@ seqlist_char::~seqlist_char()
     n = 0;
 }
 
-int seqlist_char::search(char c)
+bool seqlist_char::empty()const
+{
+    return n == 0;
+}
+
+int seqlist_char::length()const
+{
+    return n;
+}
+
+int seqlist_char::size()const
+{
+    return max_size;
+}
+
+int seqlist_char::search(char c)const
 {
     for (int i = 0; i != n; ++i) {
         if (v[i] == c)
@@ -39,7 +55,7 @@ int seqlist_char::search(char c)
     return -1;
 }
 
-char seqlist_char::getitem(int i)
+char seqlist_char::getitem(int i)const
 {
     return v[i];
 }
