@@ -12,13 +12,16 @@ slist::slist()
 
 slist::slist(slist& L)
 {
-	// not implemented
-	size = 0;
+	head = new node();
+	size = L.length();
+	// not completed
 }
 
 slist::~slist()
 {
-	// not implemented
+	for (int i = 0; i < size; i++) {
+		pop_front();
+	}
 }
 
 bool slist::empty()const
@@ -33,17 +36,40 @@ int slist::length()const
 
 int slist::search(int x)const
 {
-	// not implemented
+	node *q = head->next;
+	for (int i = 0; i < size; i++) {
+		if (q->val == x) {
+			return i;
+		}
+		q = q->next;
+	}
+	return -1;
 }
 
 int slist::getitem(int i)const
 {
-	// not implemented
+	if (i < 0 || i >= size) {
+		cerr << "Error: index out of range." << endl;
+		exit(1);
+	}
+	node *q = head->next;
+	for (int j = 0; j < i; j++) {
+		q = q->next;
+	}
+	return q->val;
 }
 	
 void slist::setitem(int i, int x)
 {
-	// not implemented
+	if (i < 0 || i >= size) {
+		cerr << "Error: index out of range." << endl;
+		exit(1);
+	}
+	node *q = head->next;
+	for (int j = 0; j < i; j++) {
+		q = q->next;
+	}
+	q->val = x;
 }
 
 void slist::push_front(int x)
