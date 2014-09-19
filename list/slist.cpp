@@ -14,7 +14,14 @@ slist::slist(slist& L)
 {
 	head = new node();
 	size = L.length();
-	// not completed
+	node *p = L.head;
+	node *q = head;
+	for (int i = 0; i < size; i++) {
+		p = p->next;
+		node *np = new node(p->val);
+		q->next = np;
+		q = q->next;
+	
 }
 
 slist::~slist()

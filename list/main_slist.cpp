@@ -17,6 +17,12 @@ int main()
 	cout << a->getitem(2) << endl;
 	a->setitem(1,99);
 	a->output();
+	slist b(*a);
+	b.output();
+	slist c;
+	c.output();
+	slist d(c);
+	d.output();
 	delete a;
 }
 
