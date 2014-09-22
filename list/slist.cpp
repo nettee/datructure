@@ -21,7 +21,7 @@ slist::slist(slist& L)
 		node *np = new node(p->val);
 		q->next = np;
 		q = q->next;
-	
+    }
 }
 
 slist::~slist()
@@ -87,7 +87,7 @@ void slist::push_front(int x)
 	++size;
 }
 
-void slist::pop_front()
+int slist::pop_front()
 {
 	if (size == 0) {
 		cerr << "Error: pop from empty list" << endl;
@@ -95,8 +95,10 @@ void slist::pop_front()
 	}
 	node *q = head->next;
 	head->next = q->next;
+    int val = q->val;
 	delete q;
 	--size;
+    return val;
 }
 
 void slist::output()
@@ -108,4 +110,12 @@ void slist::output()
 		q = q->next;
 	}
 	cout << "]" << endl;
+}
+
+void reverse(slist *in, slist *out)
+{
+    while (!in->empty()) {
+        int val = in->pop_front();
+        out->push_front(val);
+    }
 }

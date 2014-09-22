@@ -35,7 +35,7 @@ public:
 
     // modify a list
 	void push_front(int x);
-	void pop_front();
+	int pop_front();
 //    void insert(int i, int x);
 //    void remove(int i, int x);
 //    void append(int x);
@@ -52,5 +52,7 @@ private:
     node *head;
     int size;
 };
+
+void reverse(slist *in, slist *out);
 
 #endif

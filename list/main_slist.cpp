@@ -12,17 +12,18 @@ int main()
 	a->push_front(18);
 	a->push_front(22);
 	a->output();
-	cout << a->search(70) << endl;
-	cout << a->search(8) << endl;
-	cout << a->getitem(2) << endl;
 	a->setitem(1,99);
 	a->output();
+    a->push_front(1);
+    a->push_front(74);
+    a->push_front(52);
 	slist b(*a);
 	b.output();
-	slist c;
-	c.output();
-	slist d(c);
-	d.output();
+
+    slist *c = new slist();
+    reverse(a, c);
+    c->output();
+
 	delete a;
 }
 
