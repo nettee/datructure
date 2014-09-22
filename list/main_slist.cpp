@@ -17,6 +17,9 @@ int main()
     a->push_front(1);
     a->push_front(74);
     a->push_front(52);
+    a->push_back(-10);
+    a->push_back(88);
+    a->output();
 	slist b(*a);
 	b.output();
 

@@ -7,13 +7,15 @@ using namespace std;
 slist::slist()
 {
 	head = new node();
+    head->next = head;
+    last = head;
 	size = 0;
 }
 
 slist::slist(slist& L)
 {
-	head = new node();
-	size = L.length();
+    head = new node();
+    size = L.length();
 	node *p = L.head;
 	node *q = head;
 	for (int i = 0; i < size; i++) {
@@ -21,6 +23,10 @@ slist::slist(slist& L)
 		node *np = new node(p->val);
 		q->next = np;
 		q = q->next;
+        if (i == size - 1) {  // last node
+            last = q;
+            q->next = head;
+        }
     }
 }
 
@@ -82,6 +88,9 @@ void slist::setitem(int i, int x)
 void slist::push_front(int x)
 {
 	node *q = new node(x);
+    if (size == 0) {
+        last = q;
+    }
 	q->next = head->next;
 	head->next = q;
 	++size;
@@ -98,7 +107,20 @@ int slist::pop_front()
     int val = q->val;
 	delete q;
 	--size;
+    if (size == 0) {
+        last = head;
+    }
     return val;
+}
+
+void slist::push_back(int x)
+{
+    node *q = new node(x);
+    q->next = head;
+    // note that in empty list, var last is head
+    last->next = q;
+    last = q;
+    ++size;
 }
 
 void slist::output()

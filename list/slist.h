@@ -36,10 +36,9 @@ public:
     // modify a list
 	void push_front(int x);
 	int pop_front();
+    void push_back(int x);
 //    void insert(int i, int x);
 //    void remove(int i, int x);
-//    void append(int x);
-//    int pop();
 //    void extend(slist& L);
 
     // other operations
@@ -50,6 +49,7 @@ public:
 
 private:
     node *head;
+    node *last;
     int size;
 };
 
