@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <cassert>
+#include <cmath>
 
 #ifndef _POLYNOMIAL_H_
 #define _POLYNOMIAL_H_
@@ -19,7 +20,7 @@ struct term {
 class Polynomial {
 public:
     Polynomial();
-    Polynomial(Polynomial& L);
+    Polynomial(Polynomial& p);
     ~Polynomial();
 
     bool empty();
@@ -28,6 +29,8 @@ public:
 	void push_front(double c, int e);
 	void pop_front();
     void push_back(double c, int e);
+
+    term *gethead() { return head; }
 
     void input();
     void output();
@@ -136,5 +139,32 @@ void Polynomial::output()
 		q = q->next;
 	}
 }
+
+void add_poly(Polynomial& a, Polynomial &b)
+{
+    Polynomial c;
+    term *pa = a.gethead()->next;
+    term *pb = b.gethead()->next;
+    while (pa != a.gethead() || pb != b.gethead()) {
+        if (pa == a.gethead() || pa->expo > pb->expo) {
+            c.push_back(pb->coeff, pb->expo);
+            pb = pb->next;
+        } else if (pb == b.gethead() || pa->expo < pb->expo) {
+            c.push_back(pa->coeff, pa->expo);
+            pa = pa->next;
+        } else {
+            double t = pa->coeff + pb->coeff;
+            if (fabs(t) > 0.001) {
+                c.push_back(t, pa->expo);
+            }
+            pa = pa->next;
+            pb = pb->next;
+        }
+    }
+    c.output();
+}
+            
+
+
 
 #endif

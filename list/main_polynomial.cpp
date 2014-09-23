@@ -10,4 +10,10 @@ int main()
     p.output();
     cout << p.length() << endl;
 
+    Polynomial q;
+    q.input();
+    q.output();
+    cout << q.length() << endl;
+
+    add_poly(p, q);
 }
