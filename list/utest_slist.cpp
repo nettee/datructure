@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-	slist *a = new slist();
+	slist<int> *a = new slist<int>();
 	a->output();
 
 	a->push_front(9);
@@ -22,10 +22,10 @@ int main()
     a->push_back(-10);
     a->push_back(88);
     a->output();
-	slist b(*a);
+	slist<int> b(*a);
 	b.output();
 
-    slist *c = new slist();
+    slist<int> *c = new slist<int>();
     reverse(a, c);
     c->output();
 
