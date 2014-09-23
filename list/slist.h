@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <cassert>
 
 #ifndef _SLIST_H_
 #define _SLIST_H_

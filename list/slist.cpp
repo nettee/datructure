@@ -61,10 +61,7 @@ int slist::search(int x)const
 
 int slist::getitem(int i)const
 {
-	if (i < 0 || i >= size) {
-		cerr << "Error: index out of range." << endl;
-		exit(1);
-	}
+    assert(i >= 0 && i < size);
 	node *q = head->next;
 	for (int j = 0; j < i; j++) {
 		q = q->next;
@@ -74,10 +71,7 @@ int slist::getitem(int i)const
 	
 void slist::setitem(int i, int x)
 {
-	if (i < 0 || i >= size) {
-		cerr << "Error: index out of range." << endl;
-		exit(1);
-	}
+    assert(i >= 0 && i < size);
 	node *q = head->next;
 	for (int j = 0; j < i; j++) {
 		q = q->next;
@@ -98,10 +92,7 @@ void slist::push_front(int x)
 
 int slist::pop_front()
 {
-	if (size == 0) {
-		cerr << "Error: pop from empty list" << endl;
-		exit(1);
-	}
+    assert(size != 0);
 	node *q = head->next;
 	head->next = q->next;
     int val = q->val;

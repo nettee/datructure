@@ -7,11 +7,13 @@ int main()
 {
 	slist *a = new slist();
 	a->output();
+    a->pop_front();
 	a->push_front(9);
 	a->push_front(70);
 	a->push_front(18);
 	a->push_front(22);
 	a->output();
+
 	a->setitem(1,99);
 	a->output();
     a->push_front(1);
