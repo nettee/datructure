@@ -1,14 +1,14 @@
-slist: slist.o main_slist.o
-	g++ slist.o main_slist.o
+slist: slist.o utest_slist.o
+	g++ slist.o utest_slist.o
 
-slist-d: slist.cpp main_slist.cpp
-	g++ -g slist.cpp main_slist.cpp
+slist-d: slist.cpp utest_slist.cpp
+	g++ -g slist.cpp utest_slist.cpp
 
 slist.o: slist.cpp
 	g++ -c slist.cpp
-main_slist.o: main_slist.cpp
-	g++ -c main_slist.cpp
+utest_slist.o: utest_slist.cpp
+	g++ -c utest_slist.cpp
 
 slist-c:
-	clang++ slist.cpp main_slist.cpp
+	clang++ slist.cpp utest_slist.cpp
 
