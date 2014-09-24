@@ -14,7 +14,6 @@ int main()
         scanf("%d", v + i);
     }
     
-    //int v[] = {3, 5, 2, 4, 9, 8, 1, 6, 7, 10, 11};
     rearrange(v, size);
     for (i = 0; i < 11; i++) {
         printf("%d ", v[i]);
