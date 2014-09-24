@@ -135,9 +135,10 @@ void Polynomial::output()
     term *q = head->next;
     for (int i = 0; i != size; ++i) {
         std::cout << "(" << q->coeff << ", ";
-        std::cout << q->expo << ")" << std::endl;
+        std::cout << q->expo << ") ";
         q = q->next;
     }
+    std::cout << std::endl;
 }
 
 void add_poly(Polynomial& a, Polynomial& b, Polynomial& c)
