@@ -190,12 +190,11 @@ template <typename T>
 void slist<T>::output()
 {
 	node<T> *q = head->next;
-	std::cout << "[";
 	for (int i = 0; i != size; ++i) {
-		std::cout << q->val << ", ";
+		std::cout << q->val << " ";
 		q = q->next;
 	}
-	std::cout << "]" << std::endl;
+	std::cout << std::endl;
 }
 
 template <typename T>
