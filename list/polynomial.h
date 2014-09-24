@@ -141,8 +141,19 @@ void Polynomial::output()
     std::cout << std::endl;
 }
 
+// add polynomial a and b, put result in c
+// c must be empty
+// usage:
+//      Polynomial a;
+//      a.input();
+//      Polynomial b;
+//      b.input();
+//      Polynomial c;
+//      add_poly(a, b, c);
+//
 void add_poly(Polynomial& a, Polynomial& b, Polynomial& c)
 {
+    assert(c.empty());
     term *pa = a.gethead()->next;
     term *pb = b.gethead()->next;
     while (pa != a.gethead() || pb != b.gethead()) {
