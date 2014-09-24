@@ -26,8 +26,8 @@ public:
     bool empty();
     int length();
 
-	void push_front(double c, int e);
-	void pop_front();
+    void push_front(double c, int e);
+    void pop_front();
     void push_back(double c, int e);
 
     term *gethead() { return head; }
@@ -44,23 +44,23 @@ private:
 
 Polynomial::Polynomial()
 {
-	head = new term(0.0, -1);
+    head = new term(0.0, -1);
     head->next = head;
     last = head;
-	size = 0;
+    size = 0;
 }
 
 Polynomial::Polynomial(Polynomial& L)
 {
     head = new term(0.0, -1);
     size = L.length();
-	term *p = L.head;
-	term *q = head;
-	for (int i = 0; i < size; i++) {
-		p = p->next;
-		term *np = new term(p->coeff, p->expo);
-		q->next = np;
-		q = q->next;
+    term *p = L.head;
+    term *q = head;
+    for (int i = 0; i < size; i++) {
+        p = p->next;
+        term *np = new term(p->coeff, p->expo);
+        q->next = np;
+        q = q->next;
         if (i == size - 1) {  // last term
             last = q;
             q->next = head;
@@ -70,14 +70,14 @@ Polynomial::Polynomial(Polynomial& L)
 
 Polynomial::~Polynomial()
 {
-	for (int i = 0; i < size; i++) {
-		pop_front();
-	}
+    for (int i = 0; i < size; i++) {
+        pop_front();
+    }
 }
 
 bool Polynomial::empty()
 {
-	return size == 0;
+    return size == 0;
 }
 
 int Polynomial::length()
@@ -87,22 +87,22 @@ int Polynomial::length()
 
 void Polynomial::push_front(double c, int e)
 {
-	term *q = new term(c, e);
+    term *q = new term(c, e);
     if (size == 0) {
         last = q;
     }
-	q->next = head->next;
-	head->next = q;
-	++size;
+    q->next = head->next;
+    head->next = q;
+    ++size;
 }
 
 void Polynomial::pop_front()
 {
     assert(size != 0);
-	term *q = head->next;
-	head->next = q->next;
-	delete q;
-	--size;
+    term *q = head->next;
+    head->next = q->next;
+    delete q;
+    --size;
     if (size == 0) {
         last = head;
     }
@@ -132,17 +132,16 @@ void Polynomial::input()
 
 void Polynomial::output()
 {
-	term *q = head->next;
-	for (int i = 0; i != size; ++i) {
+    term *q = head->next;
+    for (int i = 0; i != size; ++i) {
         std::cout << "(" << q->coeff << ", ";
         std::cout << q->expo << ")" << std::endl;
-		q = q->next;
-	}
+        q = q->next;
+    }
 }
 
-void add_poly(Polynomial& a, Polynomial &b)
+void add_poly(Polynomial& a, Polynomial& b, Polynomial& c)
 {
-    Polynomial c;
     term *pa = a.gethead()->next;
     term *pb = b.gethead()->next;
     while (pa != a.gethead() || pb != b.gethead()) {
@@ -161,10 +160,6 @@ void add_poly(Polynomial& a, Polynomial &b)
             pb = pb->next;
         }
     }
-    c.output();
 }
-            
-
-
 
 #endif

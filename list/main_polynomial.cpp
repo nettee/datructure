@@ -15,5 +15,7 @@ int main()
     q.output();
     cout << q.length() << endl;
 
-    add_poly(p, q);
+    Polynomial s;
+    add_poly(p, q, s);
+    s.output();
 }
