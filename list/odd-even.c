@@ -15,7 +15,7 @@ int main()
     }
     
     rearrange(v, size);
-    for (i = 0; i < 11; i++) {
+    for (i = 0; i < size; i++) {
         printf("%d ", v[i]);
     }
     printf("\n");
