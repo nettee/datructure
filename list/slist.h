@@ -41,7 +41,7 @@ public:
 	T pop_front();
     void push_back(T x);
 
-    // list reprenstation
+    void input();
     void output();
 
 private:
@@ -172,6 +172,18 @@ void slist<T>::push_back(T x)
     last->next = q;
     last = q;
     ++size;
+}
+
+template <typename T>
+void slist<T>::input()
+{
+    int len;
+    std::cin >> len;
+    T val;
+    for (int i = 0; i < len; i++) {
+        std::cin >> val;
+        push_back(val);
+    }
 }
 
 template <typename T>
