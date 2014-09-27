@@ -1,14 +1,13 @@
 #include <iostream>
 
-#include "sstack.h"
+#include "vstack.h"
 
 using namespace std;
 
 int main()
 {
-    sstack<char> s;
+    vstack<char> s;
     assert(s.empty());
-    assert(!s.full());
     s.push('a');
     assert(!s.empty());
     s.push('r');

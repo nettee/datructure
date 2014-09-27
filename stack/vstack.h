@@ -3,14 +3,14 @@
 #include <cstdlib>
 #include <cassert>
 
-#ifndef _SSTACK_H_
-#define _SSTACK_H_
+#ifndef _VSTACK_H_
+#define _VSTACK_H_
 
 template <typename T>
-class sstack {
+class vstack {
 public:
-    sstack(int size = 32);
-    ~sstack();
+    vstack(int size = 32);
+    ~vstack();
 
     bool empty()const;
     int size()const;
@@ -30,7 +30,7 @@ private:
 };
 
 template <typename T>
-sstack<T>::sstack(int size)
+vstack<T>::vstack(int size)
 {
     max_size = size;
     top = 0;
@@ -38,52 +38,52 @@ sstack<T>::sstack(int size)
 }
 
 template <typename T>
-sstack<T>::~sstack()
+vstack<T>::~vstack()
 {
     clear();
     delete []v;
 }
 
 template <typename T>
-bool sstack<T>::empty()const
+bool vstack<T>::empty()const
 {
     return top == 0;
 }
 
 template <typename T>
-bool sstack<T>::full()const
+bool vstack<T>::full()const
 {
     return top == max_size;
 }
 
 template <typename T>
-int sstack<T>::size()const
+int vstack<T>::size()const
 {
     return top;
 }
 
 template <typename T>
-void sstack<T>::push(T x)
+void vstack<T>::push(T x)
 {
     assert(!full());
     v[top++] = x;
 }
 
 template <typename T>
-T sstack<T>::pop()
+T vstack<T>::pop()
 {
     assert(!empty());
     return v[--top];
 }
 
 template <typename T>
-void sstack<T>::clear()
+void vstack<T>::clear()
 {
     top = 0;
 }
 
 template <typename T>
-void sstack<T>::output()
+void vstack<T>::output()
 {
     for (int i = 0; i < top; i++) {
         std::cout << v[i] << " ";
