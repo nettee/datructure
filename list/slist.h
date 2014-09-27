@@ -10,10 +10,10 @@ struct node {
     T val;
     node<T> *next;
     node() {
-        val = 0;
+        val = T();
         next = NULL;
     }
-    node(int data) {
+    node(T data) {
         val = data;
         next = NULL;
     }
