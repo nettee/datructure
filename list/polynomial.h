@@ -157,10 +157,16 @@ void add_poly(Polynomial& a, Polynomial& b, Polynomial& c)
     term *pa = a.gethead()->next;
     term *pb = b.gethead()->next;
     while (pa != a.gethead() || pb != b.gethead()) {
-        if (pa == a.gethead() || pa->expo > pb->expo) {
+        if (pa == a.gethead()) {
             c.push_back(pb->coeff, pb->expo);
             pb = pb->next;
-        } else if (pb == b.gethead() || pa->expo < pb->expo) {
+        } else if (pb == b.gethead()) {
+            c.push_back(pa->coeff, pa->expo);
+            pa = pa->next;
+        } else if (pa->expo > pb->expo) {
+            c.push_back(pb->coeff, pb->expo);
+            pb = pb->next;
+        } else if (pa->expo < pb->expo) {
             c.push_back(pa->coeff, pa->expo);
             pa = pa->next;
         } else {

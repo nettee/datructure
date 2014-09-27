@@ -33,7 +33,7 @@ public:
     int search(T x)const;
 
     // item operation
-    int getitem(T i)const;
+    T getitem(int i)const;
     void setitem(int i, T x);
 
     // modify a list
@@ -115,7 +115,7 @@ int slist<T>::search(T x)const
 }
 
 template <typename T>
-int slist<T>::getitem(T i)const
+T slist<T>::getitem(int i)const
 {
     assert(i >= 0 && i < size);
 	node<T> *q = head->next;
