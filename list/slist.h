@@ -29,7 +29,7 @@ public:
 
     // list info and referrence
     bool empty()const;
-    int length()const;
+    int size()const;
     int search(T x)const;
 
     // item operation
@@ -47,7 +47,7 @@ public:
 private:
     node<T> *head;
     node<T> *last;
-    int size;
+    int n;
 };
 
 template <typename T>
@@ -59,22 +59,22 @@ slist<T>::slist()
 	head = new node<T>();
     head->next = head;
     last = head;
-	size = 0;
+	n = 0;
 }
 
 template <typename T>
 slist<T>::slist(slist<T>& L)
 {
     head = new node<T>();
-    size = L.length();
+    n = L.size();
 	node<T> *p = L.head;
 	node<T> *q = head;
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < n; i++) {
 		p = p->next;
 		node<T> *np = new node<T>(p->val);
 		q->next = np;
 		q = q->next;
-        if (i == size - 1) {  // last node
+        if (i == n - 1) {  // last node
             last = q;
             q->next = head;
         }
@@ -84,7 +84,7 @@ slist<T>::slist(slist<T>& L)
 template <typename T>
 slist<T>::~slist()
 {
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < n; i++) {
 		pop_front();
 	}
 }
@@ -92,20 +92,20 @@ slist<T>::~slist()
 template <typename T>
 bool slist<T>::empty()const
 {
-	return size == 0;
+	return n == 0;
 }
 
 template <typename T>
-int slist<T>::length()const
+int slist<T>::size()const
 {
-	return size;
+	return n;
 }
 
 template <typename T>
 int slist<T>::search(T x)const
 {
 	node<T> *q = head->next;
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < n; i++) {
 		if (q->val == x) {
 			return i;
 		}
@@ -117,7 +117,7 @@ int slist<T>::search(T x)const
 template <typename T>
 T slist<T>::getitem(int i)const
 {
-    assert(i >= 0 && i < size);
+    assert(i >= 0 && i < n);
 	node<T> *q = head->next;
 	for (int j = 0; j < i; j++) {
 		q = q->next;
@@ -128,7 +128,7 @@ T slist<T>::getitem(int i)const
 template <typename T>
 void slist<T>::setitem(int i, T x)
 {
-    assert(i >= 0 && i < size);
+    assert(i >= 0 && i < n);
 	node<T> *q = head->next;
 	for (int j = 0; j < i; j++) {
 		q = q->next;
@@ -140,24 +140,24 @@ template <typename T>
 void slist<T>::push_front(T x)
 {
 	node<T> *q = new node<T>(x);
-    if (size == 0) {
+    if (n == 0) {
         last = q;
     }
 	q->next = head->next;
 	head->next = q;
-	++size;
+	++n;
 }
 
 template <typename T>
 T slist<T>::pop_front()
 {
-    assert(size != 0);
+    assert(n != 0);
 	node<T> *q = head->next;
 	head->next = q->next;
     T val = q->val;
 	delete q;
-	--size;
-    if (size == 0) {
+	--n;
+    if (n == 0) {
         last = head;
     }
     return val;
@@ -171,7 +171,7 @@ void slist<T>::push_back(T x)
     // note that in empty list, var last is head
     last->next = q;
     last = q;
-    ++size;
+    ++n;
 }
 
 template <typename T>
@@ -190,7 +190,7 @@ template <typename T>
 void slist<T>::output()
 {
 	node<T> *q = head->next;
-	for (int i = 0; i != size; ++i) {
+	for (int i = 0; i != n; ++i) {
 		std::cout << q->val << " ";
 		q = q->next;
 	}

@@ -8,7 +8,7 @@
 template <typename T>
 class vlist {
 public:
-    vlist(int size = 40);
+    vlist(int n = 40);
     vlist(vlist<T>& L);
     ~vlist();
 
@@ -30,52 +30,58 @@ public:
 
 private:
     T *v;
-    int max_size;
-    int size;
+    int msize;
+    int sz;
 };
 
 template <typename T>
-vlist<T>::vlist(int size)
+vlist<T>::vlist(int n)
 {
-    assert(size > 0);
-    max_size = size;
-    size = 0;
-    v = new T[max_size];
+    assert(n > 0);
+    msize = n;
+    sz = 0;
+    v = new T[msize];
 }
 
 template <typename T>
 vlist<T>::vlist(vlist<T>& L)
 {
-    max_size = L.max_size();
-    size = L.size();
-    v = new T[max_size];
-    for (int i = 0; i < size; i++) {
+    msize = L.max_size();
+    sz = L.size();
+    v = new T[msize];
+    for (int i = 0; i < sz; i++) {
         v[i] = L.getitem(i);
     }
 }
 
 template <typename T>
+vlist<T>::~vlist()
+{
+    delete []v;
+}
+
+template <typename T>
 bool vlist<T>::empty()const
 {
-    return size == 0;
+    return sz == 0;
 }
 
 template <typename T>
 int vlist<T>::max_size()const
 {
-    return max_size;
+    return msize;
 }
 
 template <typename T>
 int vlist<T>::size()const
 {
-    return size;
+    return sz;
 }
 
 template <typename T>
-int vlist<T>::search(T x)
+int vlist<T>::search(T x)const
 {
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < sz; i++) {
         if (v[i] == x) {
             return i;
         }
@@ -84,31 +90,31 @@ int vlist<T>::search(T x)
 }
 
 template <typename T>
-T vlist<T>::getitem(int i)
+T vlist<T>::getitem(int i)const
 {
-    assert(i >= 0 && i < size);
+    assert(i >= 0 && i < sz);
     return v[i];
 }
 
 template <typename T>
 void vlist<T>::setitem(int i, T x) 
 {
-    assert(i >= 0 && i < size);
+    assert(i >= 0 && i < sz);
     v[i] = x;
 }
 
 template <typename T>
 void vlist<T>::push_back(T x)
 {
-    assert(size < max_size);
-    v[size++] = x;
+    assert(sz < msize);
+    v[sz++] = x;
 }
 
 template <typename T>
 T vlist<T>::pop_back()
 {
-    assert(size != 0);
-    return v[--size];
+    assert(sz != 0);
+    return v[--sz];
 }
 
 template <typename T>
@@ -126,7 +132,7 @@ void vlist<T>::input()
 template <typename T>
 void vlist<T>::output()
 {
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < sz; i++) {
         std::cout << v[i] << " ";
     }
     std::cout << std::endl;
@@ -135,10 +141,10 @@ void vlist<T>::output()
 template <typename T>
 vlist<T> vlist<T>::operator=(vlist<T>& L)
 {
-    max_size = L.max_size();
-    size = L.size();
-    v = new T[max_size];
-    for (int i = 0; i < size; i++) {
+    msize = L.max_size();
+    sz = L.size();
+    v = new T[msize];
+    for (int i = 0; i < sz; i++) {
         v[i] = L.getitem(i);
     }
 }
