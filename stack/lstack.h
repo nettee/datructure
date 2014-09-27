@@ -23,6 +23,7 @@ public:
     ~lstack();
 
     bool empty()const;
+    int size()const;
     
     void push(T x);
     T pop();
@@ -50,6 +51,16 @@ template <typename T>
 bool lstack<T>::empty()const
 {
     return top == NULL;
+}
+
+template <typename T>
+int lstack<T>::size()const
+{
+    int n = 0;
+    for (node<T> *q = top; q != NULL; q = q->next) {
+        ++n;
+    }
+    return n;
 }
 
 template <typename T>

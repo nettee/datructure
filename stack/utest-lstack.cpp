@@ -10,13 +10,13 @@ int main()
     assert(s.empty());
     s.push('a');
     assert(!s.empty());
-    cout << s.pop() << endl;
-    s.pop();
     s.push('r');
     s.push('5');
     s.push('p');
+    assert(s.size() == 4);
     char a = s.pop();
     assert(a == 'p');
+    assert(s.size() == 3);
 
     s.output();
 }

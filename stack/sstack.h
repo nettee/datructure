@@ -13,7 +13,6 @@ public:
     ~sstack();
 
     bool empty()const;
-    bool full()const;
     int size()const;
 
     void push(T x);
@@ -27,6 +26,7 @@ private:
     int top;
     int max_size;
         
+    bool full()const;
 };
 
 template <typename T>
