@@ -1,14 +1,14 @@
+# setting compile options
+CFLAGS = -ggdb -Wall -Werror
+
 slist: utest_slist.o
-	g++ utest_slist.o
+	g++ -o slist.out $(CFLAGS) utest_slist.cpp
 
-slist-d: utest_slist.cpp
-	g++ -g utest_slist.cpp
+dlist: utest_dlist.o
+	g++ -o dlist.out $(CFLAGS) utest_dlist.cpp
 
-utest_slist.o: utest_slist.cpp
-	g++ -c utest_slist.cpp
+vlist: utest_vlist.o
+	g++ -o vlist.out $(CFLAGS) utest_vlist.cpp
 
-slist-c:
-	clang++ utest_slist.cpp
-
-
-
+clean:
+	\rm -f *.o
