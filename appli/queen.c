@@ -38,7 +38,7 @@ void queen(int n)
     for (int i = 0; i < NQUEEN; i++) {
         board[n] = i;
         if (can_place(n)) {
-            if (n == NQUEEN - 1) {   // all queens can place
+            if (n == NQUEEN - 1) {  // the eighth queen can place
                 ++nsolution;
                 print_board();
                 return;
