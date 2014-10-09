@@ -1,11 +1,12 @@
 #include <iostream>
 
-#include "lstack.h"
+#include "stack/lstack.h"
 
 using namespace std;
 
 int main()
 {
+    //
     lstack<char> s;
     assert(s.empty());
     s.push('a');

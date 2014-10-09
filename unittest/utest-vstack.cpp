@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "vstack.h"
+#include "stack/vstack.h"
 
 using namespace std;
 

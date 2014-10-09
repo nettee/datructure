@@ -1,5 +1,5 @@
 #include <iostream>
-#include "lqueue.h"
+#include "queue/lqueue.h"
 
 using namespace std;
 

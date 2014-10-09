@@ -1,5 +1,5 @@
 #include <iostream>
-#include "slist.h"
+#include "list/slist.h"
 
 using namespace std;
 

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cassert>
 
-#include "dlist.h"
+#include "list/dlist.h"
 
 #ifndef _LQUEUE_H_
 #define _LQUEUE_H_
