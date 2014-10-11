@@ -17,10 +17,10 @@ int main()
     a.setitem(1, 9);
     assert(a.getitem(1) == 9);
     assert(a.size() == 4);
-    a.pop_front();
-    a.pop_front();
-    assert(a.size() == 2);
-
+//    a.pop_front();
+//    a.pop_front();
+//    assert(a.size() == 2);
+    a.output();
 }
 
 

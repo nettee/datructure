@@ -1,9 +1,15 @@
-#include <iostream>
-#include <cstdlib>
-#include <cassert>
+// =======================================================
+// dlist.h -- Double Cycled Linked List
+//
+// dlist uses C++ template, supporting all possible types
+// which implement =, ==, < operator
+// =======================================================
 
 #ifndef _DLIST_H_
 #define _DLIST_H_
+
+#include <iostream>
+#include <cassert>
 
 template <typename T>
 struct node {
@@ -36,10 +42,20 @@ public:
     T getitem(int i)const;
     void setitem(int i, T x);
 
+    // core list operator
+    // Note that the program aborts if pop from empty list
     void push_front(T x);
     T pop_front();
     void push_back(T x);
     T pop_back();
+    
+    // for iterator use
+    node<T> *gethead() { return head; }
+    node<T> *getrear() { return rear; }
+    node<T> *begin();
+    node<T> *end();
+    node<T> *next(node<T> *it);
+    node<T> *circle(node<T> *it);
     
     void input();
     void output();
@@ -167,6 +183,35 @@ T dlist<T>::pop_back()
     delete q;
     --sz;
     return val;
+}
+
+template <typename T>
+node<T> *dlist<T>::begin()
+{
+    return gethead()->next;
+}
+
+template <typename T>
+node<T> *dlist<T>::end()
+{
+    return getrear();
+}
+
+template <typename T>
+node<T> *dlist<T>::next(node<T> *it)
+{
+    assert(it != getrear());
+    return it->next;
+}
+
+template <typename T>
+node<T> *dlist<T>::circle(node<T> *it)
+{
+    if (it->next == getrear()) {
+        return gethead()->next;
+    } else {
+        return it->next;
+    }
 }
 
 template <typename T>
