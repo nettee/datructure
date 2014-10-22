@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cassert>
 #include "stack.h"
 
 using namespace std;
@@ -23,17 +24,17 @@ bool pop_seq(int *vpush, int *vpop, int n)
     Stack<int> s;
     int i = 0, j = 0;
 
-    while(i < n || j < n) {
-        if(s.empty() || s.top() != vpop[j]) {
-            s.push(vpush[i]);
-            i++;
-        } else {
+    while(j < n) {
+        if (!s.empty() && s.top() == vpop[j]) {
             s.pop();
             j++;
+        } else {
+            if (i == n) return false; 
+            s.push(vpush[i]);
+            i++;
         }
     }
-
-    return (i == n && j == n);
+    return true;
 }
 
 int main() 
