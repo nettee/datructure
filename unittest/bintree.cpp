@@ -9,5 +9,8 @@ int main()
     char v[7] = {'a', 'b', 'c', 'd', '*', 'f', 'g'};
     t.input(v, 7);
     t.output();
+    t.preorder_traversal();
+    t.inorder_traversal();
+    t.postorder_traversal();
     return 0;
 }
