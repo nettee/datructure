@@ -92,7 +92,11 @@ BinTreeNode<T> *BinTree<T>::input_subtree(int num, T *v, int len)
     if (num > len) {
         return NULL;
     }
-    BinTreeNode<T> *np = new BinTreeNode<T>(v[num-1]);
+    T val = v[num - 1];
+    if (val == '*') {
+        return NULL;
+    }
+    BinTreeNode<T> *np = new BinTreeNode<T>(val);
     np->left = input_subtree(num * 2, v, len);
     np->right = input_subtree(num * 2 + 1, v, len);
     return np;

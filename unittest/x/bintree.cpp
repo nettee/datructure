@@ -3,11 +3,22 @@
 
 using namespace std;
 
+char v[29] = {
+                                  'A',
+
+
+                  'B',                            'C',
+
+          'D',            '*',            'E',            'F',
+
+      'G',    'H',    '*',    '*',    '*',    'I',    'J',   '*',
+    '*','*','*','*','*','*','*','*','*','*','*','*','K','L',
+};
+
 int main()
 {
     BinTree<char> t;
-    char v[7] = {'a', 'b', 'c', 'd', '*', 'f', 'g'};
-    t.input(v, 7);
+    t.input(v, 29);
     t.output();
     t.preorder_traversal();
     t.inorder_traversal();
