@@ -1,6 +1,28 @@
 #include <iostream>
 #include <cassert>
 
+int max(int x, int y)
+{
+    return (x > y) ? x : y;
+}
+
+int max(int x, int y, int z)
+{
+    if (x > y) {
+        if (x > z) {
+            return x;
+        } else {
+            return z;
+        }
+    } else {
+        if (y > z) {
+            return y;
+        } else {
+            return z;
+        }
+    }
+}
+
 template <typename T>
 struct BinTreeNode {
     T val;
@@ -26,7 +48,7 @@ public:
     }
 
     int height();
-    int nodes();
+    int max_path_length();
 
     void input(T *v, int len) {
         assert(len > 0);
@@ -38,14 +60,17 @@ public:
     }
 
     void preorder_traversal() {
+        std::cout << " pre: ";
         preorder_(root);
         std::cout << std::endl;
     }
     void inorder_traversal() {
+        std::cout << "  in: ";
         inorder_(root);
         std::cout << std::endl;
     }
     void postorder_traversal() {
+        std::cout << "post: ";
         postorder_(root);
         std::cout << std::endl;
     }
@@ -54,6 +79,8 @@ private:
     BinTreeNode<T> *root;
 
     void clear_(BinTreeNode<T> *subtree);
+    int height_(BinTreeNode<T> *subtree);
+    int max_path_length_(BinTreeNode<T> *subtree);
 
     BinTreeNode<T> *input_subtree(int, T *, int);
     void output_(BinTreeNode<T> *tree);
@@ -84,6 +111,49 @@ void BinTree<T>::clear_(BinTreeNode<T> *tree)
     clear_(tree->left);
     clear_(tree->right);
     delete tree;
+}
+
+template <typename T>
+int BinTree<T>::height()
+{
+    return height_(root);
+}
+
+template <typename T>
+int BinTree<T>::height_(BinTreeNode<T> *tree)
+{
+    if (tree == NULL) {
+        return 0;
+    } else {
+        return 1 + max(height_(tree->left), height_(tree->right));
+    }
+}
+
+template <typename T>
+int BinTree<T>::max_path_length()
+{
+    return max_path_length_(root);
+}
+
+template <typename T>
+int BinTree<T>::max_path_length_(BinTreeNode<T> *tree)
+{
+    if (tree == NULL) {
+        return 0;
+    } 
+    int left_height = tree->left ? height_(tree->left) : 0;
+    int right_height = tree->right ? height_(tree->right) : 0;
+    if (tree->left == NULL && tree->right == NULL) {
+        return 0;
+    } else if (tree->left == NULL && tree->right != NULL) {
+        return max(right_height, max_path_length_(tree->right));
+    } else if (tree->left != NULL && tree->right == NULL) {
+        return max(left_height, max_path_length_(tree->left));
+    } else {
+        return max(left_height + right_height, 
+                max_path_length_(tree->left),
+                max_path_length_(tree->right));
+    }
 }
 
 template <typename T>

@@ -23,5 +23,6 @@ int main()
     t.preorder_traversal();
     t.inorder_traversal();
     t.postorder_traversal();
+    cout << "Longest path in tree has length " << t.max_path_length() << endl;
     return 0;
 }
