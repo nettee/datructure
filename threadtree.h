@@ -25,10 +25,7 @@ public:
 
     void pre_thread();
     void pre_order();
-    ThreadTreeNode<T> *first(ThreadTreeNode<T> *);
-    ThreadTreeNode<T> *last(ThreadTreeNode<T> *);
     ThreadTreeNode<T> *next(ThreadTreeNode<T> *);
-    ThreadTreeNode<T> *prior(ThreadTreeNode<T> *);
 
     void input(T *v, int len) {
         assert(len > 0);
@@ -97,40 +94,12 @@ void ThreadTree<T>::pre_thread_(ThreadTreeNode<T> *current, ThreadTreeNode<T> *&
 }
 
 template <typename T>
-ThreadTreeNode<T> *ThreadTree<T>::first(ThreadTreeNode<T> *q)
-{
-    while (q->ltag == 0) {
-        q = q->left;
-    }
-    return q;
-}
-
-template <typename T>
-ThreadTreeNode<T> *ThreadTree<T>::last(ThreadTreeNode<T> *q)
-{
-    while (q->rtag == 0) {
-        q = q->right;
-    }
-    return q;
-}
-
-template <typename T>
 ThreadTreeNode<T> *ThreadTree<T>::next(ThreadTreeNode<T> *q)
 {
     if (q->ltag == 0) {
         return q->left;
     } else {
         return q->right;
-    }
-}
-
-template <typename T>
-ThreadTreeNode<T> *ThreadTree<T>::prior(ThreadTreeNode<T> *q)
-{
-    if (q->ltag == 0) {
-        return last(q->left);
-    } else {
-        return q->left;
     }
 }
 
