@@ -1,5 +1,7 @@
-#include <iostream>
 #include "list/dlist.h"
+
+#include <iostream>
+#include <random>
 
 using namespace std;
 
@@ -7,17 +9,19 @@ int main()
 {
     DList<int> a;
     assert(a.empty());
-    a.push_front(1);
-    a.push_back(8);
-    a.push_back(17);
-    a.push_back(80);
-    assert(a.size() == 4);
+    default_random_engine e;
+    for (int i = 0; i < 10; i++) {
+        a.push_back(e());
+    }
+    assert(a.size() == 10);
     a.setitem(1, 9);
     assert(a.getitem(1) == 9);
-    assert(a.size() == 4);
+    assert(a.size() == 10);
     a.pop_front();
     a.pop_front();
-    assert(a.size() == 2);
+    assert(a.size() == 8);
+
+    cout << "Good test." << endl;
 }
 
 
