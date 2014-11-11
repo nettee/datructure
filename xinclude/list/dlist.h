@@ -5,35 +5,35 @@
 // which implement =, ==, < operator
 // =======================================================
 
-#ifndef _DLIST_H_
-#define _DLIST_H_
+#ifndef __DLIST_H__
+#define __DLIST_H__
 
 #include <iostream>
 #include <cassert>
 
 template <typename T>
-struct node {
+struct DListNode {
     T val;
-    node<T> *prev;
-    node<T> *next;
-    node() {
+    DListNode<T> *prev;
+    DListNode<T> *next;
+    DListNode() {
         val = T();
         prev = NULL;
         next = NULL;
     }
-    node(T data) {
-        val = data;
+    DListNode(T x) {
+        val = x;
         prev = NULL;
         next = NULL;
     }
 };
 
 template <typename T>
-class dlist {
+class DList {
 public:
-    dlist();
-    dlist(dlist<T>& L);
-    ~dlist();
+    DList();
+    DList(DList<T>& L);
+    ~DList();
 
     bool empty()const;
     int size()const;
@@ -50,40 +50,40 @@ public:
     T pop_back();
     
     // for iterator use
-    node<T> *gethead() { return head; }
-    node<T> *getrear() { return rear; }
-    node<T> *begin();
-    node<T> *end();
-    node<T> *next(node<T> *it);
-    node<T> *circle(node<T> *it);
+    DListNode<T> *gethead() { return head; }
+    DListNode<T> *getrear() { return rear; }
+    DListNode<T> *begin();
+    DListNode<T> *end();
+    DListNode<T> *next(DListNode<T> *it);
+    DListNode<T> *circle(DListNode<T> *it);
     
     void input();
     void output();
 
 private:
-    node<T> *head;
-    node<T> *rear;
+    DListNode<T> *head;
+    DListNode<T> *rear;
     int sz;
 };
 
 template <typename T>
-dlist<T>::dlist()
+DList<T>::DList()
 {
-    head = new node<T>();
-    rear = new node<T>();
+    head = new DListNode<T>();
+    rear = new DListNode<T>();
     head->next = rear;
     rear->prev = head;
     sz = 0;
 }
 
 template <typename T>
-dlist<T>::dlist(dlist<T>& L)
+DList<T>::DList(DList<T>& L)
 {
     // not implemented
 }
 
 template <typename T>
-dlist<T>::~dlist()
+DList<T>::~DList()
 {
     for (int i = 0; i < sz; i++) {
         pop_back();
@@ -91,21 +91,21 @@ dlist<T>::~dlist()
 }
 
 template <typename T>
-bool dlist<T>::empty()const
+bool DList<T>::empty()const
 {
     return sz == 0;
 }
 
 template <typename T>
-int dlist<T>::size()const
+int DList<T>::size()const
 {
     return sz;
 }
 
 template <typename T>
-int dlist<T>::search(T x)const
+int DList<T>::search(T x)const
 {
-    node<T> *q = head->next;
+    DListNode<T> *q = head->next;
     for (int i = 0; i < sz; i++) {
         if (q->val == x) {
             return i;
@@ -116,10 +116,10 @@ int dlist<T>::search(T x)const
 }
 
 template <typename T>
-T dlist<T>::getitem(int i)const
+T DList<T>::getitem(int i)const
 {
     assert(i >= 0 && i < sz);
-    node<T> *q = head->next;
+    DListNode<T> *q = head->next;
     for (int j = 0; j < i; j++) {
         q = q->next;
     }
@@ -127,10 +127,10 @@ T dlist<T>::getitem(int i)const
 }
 
 template <typename T>
-void dlist<T>::setitem(int i, T x)
+void DList<T>::setitem(int i, T x)
 {
     assert(i >= 0 && i < sz);
-    node<T> *q = head->next;
+    DListNode<T> *q = head->next;
     for (int j = 0; j < i; j++) {
         q = q->next;
     }
@@ -138,9 +138,9 @@ void dlist<T>::setitem(int i, T x)
 }
 
 template <typename T>
-void dlist<T>::push_front(T x)
+void DList<T>::push_front(T x)
 {
-    node<T> *q = new node<T>(x);
+    DListNode<T> *q = new DListNode<T>(x);
     q->next = head->next;
     head->next->prev = q;
     q->prev = head;
@@ -149,10 +149,10 @@ void dlist<T>::push_front(T x)
 }
 
 template <typename T>
-T dlist<T>::pop_front()
+T DList<T>::pop_front()
 {
     assert(sz != 0);
-    node<T> *q = head->next;
+    DListNode<T> *q = head->next;
     q->next->prev = head;
     head->next = q->next;
     T val = q->val;
@@ -162,9 +162,9 @@ T dlist<T>::pop_front()
 }
 
 template <typename T>
-void dlist<T>::push_back(T x)
+void DList<T>::push_back(T x)
 {
-    node<T> *q = new node<T>(x);
+    DListNode<T> *q = new DListNode<T>(x);
     q->prev = rear->prev;
     rear->prev->next = q;
     q->next = rear;
@@ -173,10 +173,10 @@ void dlist<T>::push_back(T x)
 }
 
 template <typename T>
-T dlist<T>::pop_back()
+T DList<T>::pop_back()
 {
     assert(sz != 0);
-    node<T> *q = rear->prev;
+    DListNode<T> *q = rear->prev;
     q->prev->next = rear;
     rear->prev = q->prev;
     T val = q->val;
@@ -186,26 +186,26 @@ T dlist<T>::pop_back()
 }
 
 template <typename T>
-node<T> *dlist<T>::begin()
+DListNode<T> *DList<T>::begin()
 {
     return gethead()->next;
 }
 
 template <typename T>
-node<T> *dlist<T>::end()
+DListNode<T> *DList<T>::end()
 {
     return getrear();
 }
 
 template <typename T>
-node<T> *dlist<T>::next(node<T> *it)
+DListNode<T> *DList<T>::next(DListNode<T> *it)
 {
     assert(it != getrear());
     return it->next;
 }
 
 template <typename T>
-node<T> *dlist<T>::circle(node<T> *it)
+DListNode<T> *DList<T>::circle(DListNode<T> *it)
 {
     if (it->next == getrear()) {
         return gethead()->next;
@@ -215,7 +215,7 @@ node<T> *dlist<T>::circle(node<T> *it)
 }
 
 template <typename T>
-void dlist<T>::input()
+void DList<T>::input()
 {
     int len;
     std::cin >> len;
@@ -227,9 +227,9 @@ void dlist<T>::input()
 }
 
 template <typename T>
-void dlist<T>::output()
+void DList<T>::output()
 {
-    node<T> *q = head->next;
+    DListNode<T> *q = head->next;
     for (int i = 0; i < sz; i++) {
         std::cout << q->val << " ";
         q = q->next;
