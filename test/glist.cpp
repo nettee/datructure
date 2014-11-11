@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
     GList<string> l;
-    l.read_tokens();
+    l.input();
 
     return 0;
 }

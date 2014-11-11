@@ -20,8 +20,6 @@ int main()
     a.pop_front();
     a.pop_front();
     assert(a.size() == 8);
-
-    cout << "Good test." << endl;
 }
 
 

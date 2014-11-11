@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 
+enum { HEAD, ATOM, SUBLIST };
+
 template <typename T>
 struct GListNode {
     int ntype;
@@ -19,21 +21,30 @@ struct GListNode {
 template <typename T>
 class GList {
 public:
-    DList<T> read_tokens();
+    void input();
 
 private:
     GListNode<T> *head;
 };
 
 template <typename T>
-DList<T> GList<T>::read_tokens()
+GListNode<T> *read_from_tokens(DList<T>& tokens)
 {
-    DList<T> wordlist;
-    T word;
+    GListNode<T> *q = new GListNode<T>;
+    return q;
+}
+
+template <typename T>
+void GList<T>::input()
+{
+    DList<std::string> tokens;
+    std::string word;
     while (std::cin >> word) {
-        wordlist.push_back(word);
-        std::cout << word;
+        tokens.push_back(word);
     }
+    assert(!tokens.empty());
+    tokens.output();
+    head = read_from_tokens(tokens);
 }
 
 #endif

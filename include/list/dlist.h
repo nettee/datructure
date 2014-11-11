@@ -32,7 +32,6 @@ template <typename T>
 class DList {
 public:
     DList();
-    DList(DList<T>& L);
     ~DList();
 
     bool empty()const;
@@ -77,15 +76,9 @@ DList<T>::DList()
 }
 
 template <typename T>
-DList<T>::DList(DList<T>& L)
-{
-    // not implemented
-}
-
-template <typename T>
 DList<T>::~DList()
 {
-    for (int i = 0; i < sz; i++) {
+    while (!empty()) {
         pop_back();
     }
 }
