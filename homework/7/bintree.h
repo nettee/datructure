@@ -1,4 +1,4 @@
-#include "stack/lstack.h"
+#include "lstack.h"
 #include <iostream>
 #include <cassert>
 
