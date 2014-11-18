@@ -4,7 +4,7 @@
 using namespace std;
 
 static const int lengthOfSource = 7;
-int source[100] = {1, 3, 5, 7, 9, 11, 13};
+int source[100] = {1, 4, 8, 16, 22, 41, 56};
 int destination[100];
 
 int main()
@@ -46,6 +46,32 @@ int main()
             assert(a.contains(i));
         }
     }
+
+    // add and remove test
+    a.fromArray(source, lengthOfSource);
+    for (int i = 0; i < 3; i++)
+        a.add(0, 0);
+    for (int i = 0; i < 5; i++) 
+        a.add(5, 5);
+    for (int i = 0; i < 8; i++)
+        a.add(98);
+    a.output();
+    // (0 0 0 0 1 4 5 5 5 5 5 8 16 22 41 56 98 98 98 98 98 98 98 98)
+    assert(a.indexOf(0) == 0);
+    assert(a.lastIndexOf(0) == 2);
+    assert(a.indexOf(5) == 5);
+    assert(a.lastIndexOf(5) == 9);
+    assert(a.indexOf(98) == 15);
+    assert(a.lastIndexOf(98) == 22);
+    for (int i = 0; i < 5; i++)
+        a.removeByIndex(5);
+    for (int i = 0; i < 3; i++)
+        a.removeByIndex(0);
+    // should be (1 4 8 16 22 41 56 98 98 98 98 98 98 98 98)
+    while (a.remove(98))
+        ;  // empty loop body!
+    a.output();
+    // should be (1 4 8 16 22 41 56)
 
 
     return 0;

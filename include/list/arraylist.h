@@ -85,6 +85,32 @@ public:
         elements[index] = e;
     }
 
+    /* different from Java API
+     * because of the pitfall of C++ language
+     */
+    E removeByIndex(int index) {
+        assert(index >= 0 && index < theSize);
+        E val = elements[index];
+        for (int j = index; j < theSize - 1; j++) {
+            elements[j] = elements[j+1];
+        }
+        --theSize;
+        return val;
+    }
+
+    bool remove(E x) {
+        for (int i = 0; i < theSize; i++) {
+            if (elements[i] == x) {
+                for (int j = i; j < theSize - 1; j++) {
+                    elements[j] = elements[j+1];
+                }
+                --theSize;
+                return true;
+            }
+        }
+        return false;
+    }
+
     // :IMPROVEABLE: efficiency
     void fromArray(E *source, int length) {
         clear();
