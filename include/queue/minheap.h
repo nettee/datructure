@@ -8,114 +8,114 @@ public:
     ~MinHeap();
     void clear();
 
-    bool empty();
-    bool full();
+    bool isEmpty();
+    bool isFull();
     int size();
 
     void insert(T x);
-    T pop_min();
+    T deleteMininal();
 
-    void input(T *v, int len);
+    void input(T *elements, int len);
     void output();
 
 private:
-    T *v;
+    T *elements;
     T sentinel;
-    int siz;
-    int msiz;
+    int curSize;
+    int maxSize;
 };
 
 template <typename T>
 MinHeap<T>::MinHeap(T sentinel, int msz)
 {
-    v = new T[msz+1];
-    msiz = msz;
-    siz = 0;
-    v[0] = sentinel;
+    elements = new T[msz+1];
+    maxSize = msz;
+    curSize = 0;
+    elements[0] = sentinel;
 }
 
 template <typename T>
 MinHeap<T>::~MinHeap()
 {
     clear();
-    delete[] v;
+    delete[] elements;
 }
 
 template <typename T>
 void MinHeap<T>::clear()
 {
-    siz = 0;
+    curSize = 0;
 }
 
 template <typename T>
-bool MinHeap<T>::empty()
+bool MinHeap<T>::isEmpty()
 {
-    return siz == 0;
+    return curSize == 0;
 }
 
 template <typename T>
-bool MinHeap<T>::full()
+bool MinHeap<T>::isFull()
 {
-    return siz == msiz;
+    return curSize == maxSize;
 }
 
 template <typename T>
 int MinHeap<T>::size()
 {
-    return siz;
+    return curSize;
 }
 
 template <typename T>
 void MinHeap<T>::insert(T x)
 {
-    assert(!full());
-    v[++siz] = x;
-    int i = siz;
-    while (v[i/2] > x) {
-        v[i] = v[i/2];
+    assert(!isFull());
+    elements[++curSize] = x;
+    int i = curSize;
+    while (elements[i/2] > x) {
+        elements[i] = elements[i/2];
         i /= 2;
     }
-    v[i] = x;
+    elements[i] = x;
 }
 
 template <typename T>
-T MinHeap<T>::pop_min()
+T MinHeap<T>::deleteMininal()
 {
-    assert(!empty());
-    T min_val = v[1];
-    T last_element = v[siz--];
+    assert(!isEmpty());
+    T minValue = elements[1];
+    T lastElement = elements[curSize--];
     int i = 1;
-    while (i * 2 <= siz) {
+    while (i * 2 <= curSize) {
         int child = i * 2;
-        if (child != siz && v[child+1] < v[child]) {
+        if (child != curSize && elements[child+1] < elements[child]) {
             ++child;
         }
-        if (last_element > v[child]) {
-            v[i] = v[child];
+        if (lastElement > elements[child]) {
+            elements[i] = elements[child];
         } else {
             break;
         }
         i = child;
     }
-    v[i] = last_element;
-    return min_val;
+    elements[i] = lastElement;
+    return minValue;
 }
 
 template <typename T>
 void MinHeap<T>::input(T *xs, int len)
 {
-    assert(len <= msiz);
+    assert(len <= maxSize);
     for (int i = 0; i < len; i++) {
-        v[i+1] = xs[i];
+        elements[i+1] = xs[i];
     }
-    siz = len;
+    curSize = len;
 }
 
 template <typename T>
 void MinHeap<T>::output()
 {
-    for (int i = 1; i <= siz; i++) {
-       std::cout << v[i] << " ";
+    for (int i = 1; i <= curSize; i++) {
+       std::cout << elements[i] << " ";
     }
     std::cout << std::endl;
 }
