@@ -72,6 +72,9 @@ int main()
         ;  // empty loop body!
     a.output();
     // should be (1 4 8 16 22 41 56)
+    a.removeRange(1, 5);
+    a.output();
+    // should be (1 41 56)
 
 
     return 0;

@@ -11,8 +11,17 @@ class ArrayList {
 public:
     ArrayList() {
         theMaxSize = defaultSize;
-        theSize = 0;
         elements = new E[theMaxSize];
+        theSize = 0;
+    }
+
+    ArrayList(ArrayList& anothor) {
+        theMaxSize = defaultSize;
+        elements = new E[theMaxSize];
+        theSize = anothor.size();
+        for (int i = 0; i < theSize; i++) {
+            elements[i] = anothor.elements[i];
+        }
     }
 
     ~ArrayList() { 
@@ -111,6 +120,16 @@ public:
         return false;
     }
 
+    void removeRange(int fromIndex, int toIndex) {
+        assert(fromIndex >= 0 && fromIndex < theSize);
+        assert(toIndex >= 0 && toIndex < theSize);
+        int rangeWidth = toIndex - fromIndex;
+        for (int j = 0; j < rangeWidth; j++) {
+            elements[fromIndex + j] = elements[toIndex + j];
+        }
+        theSize -= rangeWidth;
+    }
+
     // :IMPROVEABLE: efficiency
     void fromArray(E *source, int length) {
         clear();
@@ -124,6 +143,12 @@ public:
         for (int i = 0; i < size(); i++) {
             destination[i] = get(i);
         }
+    }
+
+    // :NOTE: subList method not implemented
+    // it is hard to implement it nice in C++
+    ArrayList subList(int fromIndex, int toIndex) {
+        assert(0);
     }
 
     void output();
