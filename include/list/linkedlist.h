@@ -45,6 +45,9 @@ public:
             q = q->next;
             delete p;
         }
+        head->next = rear;
+        rear->prev = head;
+        theSize = 0;
     }
 
     bool isEmpty() {
@@ -87,7 +90,7 @@ public:
 
     bool contains(E x) {
         LinkedNode<E> *q;
-        for (q = head->first; q != rear; q = q->next) {
+        for (q = head->next; q != rear; q = q->next) {
             if (q->val == x) {
                 return true;
             }
@@ -137,7 +140,7 @@ public:
     }
 
     bool add(E e) {
-        addFirst(e);
+        addLast(e);
         return true;
     }
 
@@ -156,7 +159,7 @@ public:
     }
 
     E removeFirst() {
-        assert(!isEmpty(););
+        assert(!isEmpty());
         LinkedNode<E> *q = head->next;
         q->next->prev = head;
         head->next = q->next;
@@ -212,9 +215,12 @@ public:
         return removeFirst();
     }
 
-    E remove(int index) {
+    /* different from Java API
+     * because of the pitfall of C++ language
+     */
+    E removeByIndex(int index) {
         assert(index >= 0 && index < theSize);
-        LinkedNode<T> *q = head->next;
+        LinkedNode<E> *q = head->next;
         for (int j = 0; j < index; j++) {
             q = q->next;
         }
@@ -227,7 +233,7 @@ public:
     }
 
     bool remove(E x) {
-        LinkedNode<T> *q;
+        LinkedNode<E> *q;
         for (q = head->next; q != rear; q = q->next) {
             if (q->val == x) {
                 q->prev->next = q->next;
@@ -238,6 +244,21 @@ public:
             }
         }
         return false;
+    }
+
+    // :IMPROVEABLE: efficiency
+    void fromArray(E *source, int length) {
+        clear();
+        for (int i = 0; i < length; i++) {
+            add(source[i]);
+        }
+    }
+
+    // :IMPROVEABLE: efficiency
+    void toArray(E *destination) {
+        for (int i = 0; i < size(); i++) {
+            destination[i] = get(i);
+        }
     }
 
     void input();
@@ -266,6 +287,7 @@ void LinkedList<E>::output()
 {
     LinkedNode<E> *q = head->next;
     for (int i = 0; i < theSize; i++) {
+        if (q == NULL) break;
         std::cout << q->val << " ";
         q = q->next;
     }

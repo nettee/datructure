@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cassert>
 
-static const int defaultSize = 128;
+static const int defaultSize = 1024;
 
 template <typename E>
 class ArrayList {
@@ -85,7 +85,21 @@ public:
         elements[index] = e;
     }
 
-    void input();
+    // :IMPROVEABLE: efficiency
+    void fromArray(E *source, int length) {
+        clear();
+        for (int i = 0; i < length; i++) {
+            add(source[i]);
+        }
+    }
+
+    // :IMPROVEABLE: efficiency
+    void toArray(E *destination) {
+        for (int i = 0; i < size(); i++) {
+            destination[i] = get(i);
+        }
+    }
+
     void output();
 
 private:
@@ -93,18 +107,6 @@ private:
     int theMaxSize;
     int theSize;
 };
-
-template <typename E>
-void ArrayList<E>::input()
-{
-    int len;
-    std::cin >> len;
-    E val;
-    for (int i = 0; i < len; i++) {
-        std::cin >> val;
-        push_back(val);
-    }
-}
 
 template <typename E>
 void ArrayList<E>::output()
