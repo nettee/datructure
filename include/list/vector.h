@@ -11,18 +11,21 @@ public:
         elementDataLength = 10;
         elementData = new E[elementDataLength];
         capacityIncrement = 0;
+        elementCount = 0;
     }
-    Vector(int initialelementDataLength) {
-        elementDataLength = initialelementDataLength;
+    Vector(int initialCapacity) {
+        elementDataLength = initialCapacity;
         elementData = new E[elementDataLength];
         capacityIncrement = 0;
+        elementCount = 0;
     }
-    Vector(int initialelementDataLength, int increment) {
-        elementDataLength = initialelementDataLength;
+    Vector(int initialCapacity, int increment) {
+        elementDataLength = initialCapacity;
         elementData = new E[elementDataLength];
         capacityIncrement = increment;
+        elementCount = 0;
     }
-    Vector(Vector & vec) {
+    Vector(Vector &vec) {
         assert(!"Not implemented");
     }
     
