@@ -1,5 +1,5 @@
-#ifndef __VECTOR__
-#define __VECTOR__
+#ifndef __VECTOR_H__
+#define __VECTOR_H__
 
 #include <iostream>
 #include <cassert>
@@ -8,50 +8,46 @@ template <typename E>
 class Vector {
 public:
     Vector() {
-        elementDataLength = 10;
-        elementData = new E[elementDataLength];
-        capacityIncrement = 0;
-        elementCount = 0;
+        capacity = 10;
+        elements = new E[capacity];
+        cap_incr = 0;
+        siz = 0;
     }
-    Vector(int initialCapacity) {
-        elementDataLength = initialCapacity;
-        elementData = new E[elementDataLength];
-        capacityIncrement = 0;
-        elementCount = 0;
+    Vector(int init_capacity) {
+        capacity = init_capacity;
+        elements = new E[capacity];
+        cap_incr = 0;
+        siz = 0;
     }
-    Vector(int initialCapacity, int increment) {
-        elementDataLength = initialCapacity;
-        elementData = new E[elementDataLength];
-        capacityIncrement = increment;
-        elementCount = 0;
+    Vector(int init_capacity, int increment) {
+        capacity = init_capacity;
+        elements = new E[capacity];
+        cap_incr = increment;
+        siz = 0;
     }
     Vector(Vector &vec) {
         assert(!"Not implemented");
     }
     
     ~Vector() {
-        delete[] elementData;
+        delete[] elements;
     }
 
     void clear() {
         removeAllElements();
     }
 
-    bool isEmpty() {
-        return elementCount == 0;
+    bool empty() {
+        return siz == 0;
     }
 
     int size() {
-        return elementCount;
-    }
-
-    int capacity() {
-        return elementDataLength;
+        return siz;
     }
 
     bool contains(E x) {
-        for (int i = 0; i < elementCount; i++) {
-            if (elementData[i] == x) {
+        for (int i = 0; i < siz; i++) {
+            if (elements[i] == x) {
                 return true;
             }
         }
@@ -59,8 +55,8 @@ public:
     }
 
     int indexOf(E x) {
-        for (int i = 0; i < elementCount; i++) {
-            if (elementData[i] == x) {
+        for (int i = 0; i < siz; i++) {
+            if (elements[i] == x) {
                 return i;
             }
         }
@@ -69,8 +65,8 @@ public:
 
     int lastIndexOf(E x) {
         int lastIndex = -1;
-        for (int i = 0; i < elementCount; i++) {
-            if (elementData[i] == x) {
+        for (int i = 0; i < siz; i++) {
+            if (elements[i] == x) {
                 lastIndex = i;
             }
         }
@@ -79,73 +75,64 @@ public:
 
     int lastIndexOf(E x, int index) {
         for (int j = index; j >= 0; j--) {
-            if (elementData[j] == x) {
+            if (elements[j] == x) {
                 return j;
             }
         }
         return -1;
     }
 
-    E get(int index) {
-        return elementAt(index);
-    }
-
     E elementAt(int index) {
         assert(index >= 0 && index < size());
-        return elementData[index];
+        return elements[index];
     }
 
     E firstElement() {
-        assert(!isEmpty());
-        return elementData[0];
+        assert(!empty());
+        return elements[0];
     }
 
     E lastElement() {
-        assert(!isEmpty());
-        return elementData[elementCount - 1];
-    }
-
-    E set(int index, E element) {
-        // :CATION: reverse param order
-        return setElementAt(element, index);
+        assert(!empty());
+        return elements[siz - 1];
     }
 
     E setElementAt(E obj, int index) {
         assert(index >= 0 && index < size());
-        E previousValue = elementData[index];
-        elementData[index] = element;
+        E previousValue = elements[index];
+        elements[index] = element;
         return previousValue;
     }
 
     void addElement(E obj) {
-        assert(elementCount < elementDataLength);
-        elementData[elementCount++] = obj;
+        assert(siz < capacity);
+        elements[siz++] = obj;
     }
 
     void insertElementAt(E obj, int index) {
         assert(index >= 0 && index < size());
-        for (int j = elementCount; j > index; j--) {
-            elementData[j] = elementData[j-1];
+        for (int j = siz; j > index; j--) {
+            elements[j] = elements[j-1];
         }
-        elementCount[index] = obj;
-        ++elementCount;
+        siz[index] = obj;
+        ++siz;
     }
 
     void removeElementAt(int index) {
         assert(index >= 0 && index < size());
-        for (int j = index; j < elementCount - 1; j++) {
-            elementData[j] = elementData[j+1];
+        for (int j = index; j < siz - 1; j++) {
+            elements[j] = elements[j+1];
         }
-        --elementCount;
+        --siz;
     }
 
     bool removeElement(E obj) {
-        for (int i = 0; i < elementCount; i++) {
-            if (elementData[i] == obj) {
-                for (int j = i;  < elementCount - 1; j++) {
-                    elementData[j] = elementData[j+1];
+        for (int i = 0; i < siz; i++) {
+            if (elements[i] == obj) {
+                for (int j = i;  < siz - 1; j++) {
+                    elements[j] = elements[j+1];
                 }
-                --elementCount;
+                --siz;
                 return true;
             }
         }
@@ -153,14 +140,14 @@ public:
     }
 
     bool removeAllElements() {
-        elementCount = 0;
+        siz = 0;
     }
 
 private:
-    E *elementData;
-    int elementCount;
-    int elementDataLength;
-    int capacityIncrement;
+    E *elements;
+    int siz;
+    int capacity;
+    int cap_incr;
 };
 
 #endif 
