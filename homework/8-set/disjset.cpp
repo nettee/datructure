@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "set/disjset.h"
+#include "disjset.h"
 
 using namespace std;
 
