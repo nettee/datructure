@@ -24,3 +24,6 @@
 
 # test input file
 *.txt
+
+# vim swap file
+*.swp
