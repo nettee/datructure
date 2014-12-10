@@ -141,11 +141,6 @@ public:
         ++theSize;
     }
 
-    bool add(E e) {
-        addLast(e);
-        return true;
-    }
-
     void add(int index, E e) {
         assert(index >= 0 && index < theSize);
         LinkedNode<E> *current = head->next;
@@ -211,10 +206,6 @@ public:
             --theSize;
         }
         return lastNode != NULL;
-    }
-
-    E remove() {
-        return removeFirst();
     }
 
     /* different from Java API
