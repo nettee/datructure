@@ -1,6 +1,8 @@
 #ifndef __LINKED_LIST_H__
 #define __LINKED_LIST_H__
 
+#include "list/array.h"
+
 #include <iostream>
 #include <cassert>
 
@@ -246,20 +248,40 @@ public:
         return false;
     }
 
-    // :IMPROVEABLE: efficiency
-    void fromArray(E *source, int length) {
+    void fromArray(Array<E> *array) {
         clear();
-        for (int i = 0; i < length; i++) {
-            add(source[i]);
+        for (int i = 0; i < array->size(); i++) {
+            addLast(array->get(i));
         }
     }
 
-    // :IMPROVEABLE: efficiency
-    void toArray(E *destination) {
-        for (int i = 0; i < size(); i++) {
-            destination[i] = get(i);
+    // :ABANDONED:
+    //// :IMPROVEABLE: efficiency
+    //void fromArray(E *source, int length) {
+    //    clear();
+    //    for (int i = 0; i < length; i++) {
+    //        add(source[i]);
+    //    }
+    //}
+
+
+    Array<E> *toArray() {
+        E *temp = new E[theSize];
+        for (int i = 0; i < theSize; i++) {
+            temp[i] = get(i);
         }
+        Array<E> *array = new Array<E>(temp, theSize);
+        delete[] temp;
+        return array;
     }
+
+    // :ABANDONED:
+    //// :IMPROVEABLE: efficiency
+    //void toArray(E *destination) {
+    //    for (int i = 0; i < size(); i++) {
+    //        destination[i] = get(i);
+    //    }
+    //}
 
     void input();
     void output();

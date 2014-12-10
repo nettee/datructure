@@ -21,12 +21,14 @@ int main()
     a.add(1);
     assert(a.size() == 1);
 
-    a.fromArray(source, lengthOfSource);
+    Array<int> *temp;
+    temp = new Array<int>(source, lengthOfSource);
+    a.fromArray(temp);
+    delete temp;
     assert(a.size() == lengthOfSource);
-    a.toArray(destination);
-    for (int i = 0; i < lengthOfSource; i++) {
-        assert(source[i] == destination[i]);
-    }
+    temp = a.toArray();
+    temp->print();
+    delete temp;
 
     // get and set test
     a.clear();
@@ -48,7 +50,9 @@ int main()
     }
 
     // add and remove test
-    a.fromArray(source, lengthOfSource);
+    temp = new Array<int>(source, lengthOfSource);
+    a.fromArray(temp);
+    delete temp;
     for (int i = 0; i < 3; i++)
         a.add(0, 0);
     for (int i = 0; i < 5; i++) 
