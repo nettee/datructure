@@ -2,8 +2,18 @@
 
 using namespace std;
 
+void init_graph();
+void delete_graph();
+
+void main_loop();
+
 int main()
 {
-    cout << "hello, weibo world" << endl;
+    init_graph();
+    
+    main_loop();
+
+    delete_graph();
+
     return 0;
 }

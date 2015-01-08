@@ -1,10 +1,10 @@
-CFLAGS = -Wall -I./include -ggdb
+CFLAGS = -Wall -I include -ggdb
 
 SRCS = $(shell find src/ -name "*.cpp")
 OBJS = $(SRCS:.cpp=.o)
 
 weibo: $(OBJS)
-	g++ -o weibo $(OBJS) $(CFLAGS)
+	g++ -o weibo $(OBJS) $(CFLAGS) 
 
 run: weibo
 	./weibo
