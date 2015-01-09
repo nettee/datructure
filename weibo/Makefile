@@ -7,7 +7,11 @@ weibo: $(OBJS)
 	g++ -o weibo $(OBJS) $(CFLAGS) 
 
 run: weibo
-	./weibo
+	./weibo -f test/newfriends.txt -a test/at.txt 2>&1 | tee log.txt
+
+gdb:
+	g++ -o weibo $(SRCS) $(CFLAGS)
+	gdb --args ./weibo
 
 clean: 
 	-rm -f weibo $(OBJS) 2>/dev/null

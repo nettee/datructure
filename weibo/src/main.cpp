@@ -1,19 +1,37 @@
+#include "network.h"
+
 #include <iostream>
+#include <fstream>
+#include <unistd.h>
 
 using namespace std;
 
-void init_graph();
-void delete_graph();
+void main_loop(Network *);
 
-void main_loop();
-
-int main()
+int main(int argc, char *argv[])
 {
-    init_graph();
-    
-    main_loop();
+    const char *ff, *fa;
+    int opt;
+    while ((opt = getopt(argc, argv, "f:a:")) != -1) {
+        if (opt == 'f') {
+            ff = optarg;
+        } else if (opt == 'a') {
+            fa = optarg;
+        }
+    }
+            
+    Network *net = new Network();
 
-    delete_graph();
+    ifstream fs_friends(ff);
+    ifstream fs_at(fa);
+    net->import(fs_friends);
+    net->add_at(fs_at);
+    fs_friends.close();
+    fs_at.close();
+    
+    main_loop(net);
+
+    delete net;
 
     return 0;
 }
