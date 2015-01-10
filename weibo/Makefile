@@ -14,7 +14,7 @@ test: weibo
 
 gdb:
 	g++ -o weibo $(SRCS) $(CFLAGS)
-	gdb --args ./weibo
+	gdb --args ./weibo -f test/friends.txt -a test/at.txt 2>&1 | tee log.txt
 
 clean: 
 	-rm -f weibo $(OBJS) 2>/dev/null
