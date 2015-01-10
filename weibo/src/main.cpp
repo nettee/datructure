@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
         }
     }
             
-    Network *net = new Network();
+    Network *net = new Network;
 
     ifstream fs_friends(ff);
     ifstream fs_at(fa);
