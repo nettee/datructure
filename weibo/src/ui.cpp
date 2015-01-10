@@ -45,6 +45,8 @@ void main_loop(Network *net)
             net->output();
         } else if (tokens[0] == "analyse") {
             net->analyse();
+        } else if (tokens[0] == "circle") {
+            net->circle();
         } else {
             cout << "invalid command '" << cmd << "'\n";
         }

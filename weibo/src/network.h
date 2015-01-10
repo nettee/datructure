@@ -70,6 +70,7 @@ public:
 
     void output();
     void analyse();
+    void circle();
 
     int num_user() { return users.size(); }
 
@@ -82,6 +83,13 @@ private:
      */
     int find(int uid);
     int find_create(int uid);
+
+    // for DFS use
+    bool *visited;
+    int *dfn;
+    int *low;
+    int *parent;
+    void dfs(int u);
 };
 
 #endif
