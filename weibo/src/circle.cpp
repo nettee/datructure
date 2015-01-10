@@ -1,4 +1,5 @@
 #include "network.h"
+#include "stack.h"
 
 #include <iostream>
 
@@ -32,45 +33,36 @@ void Network::dfs(int u) {
     dfn[u] = counter;
     low[u] = counter;
 
+    // for each v adjancent to u
     for (List::const_iterator it = users[u].friends.begin();
             it != users[u].friends.end(); ++it) {
         int v = it->dest;
 
         if (!visited[v]) {
-            /* vertex v has not been visited, that is to say,
-             * vertex v is a child of u in DFS tree,
-             * and (u,v) is an edge in DFS tree
-             */
+            // vertex v is child of u, and (u,v) is an edge in DFS tree
             parent[v] = u;
             num_child++;
 
-            // recursively do DFS on vertex v
-            dfs(v);
+            dfs(v);  // recursively do DFS on vertex v
 
             // refresh ultimate low[u]
             low[u] = min(low[u], low[v]);
 
-            /* case 1:
-             * if u is root of DFS tree,
-             * and has more than one subtrees,
-             * then u is articulation vertex
-             */
+            // case 1:
+            // u is root of DFS tree, and has more than one subtrees,
+            // then u is articulation vertex
             if (parent[u] == -1 && num_child > 1) {
                 users[u].is_arti = true;
             }
 
-            /* case 2:
-             * u is not root,
-             * if u's child v cannot reach vertex above u
-             * unless through u, then u is articulation vertex
-             */
+            // case 2: u is not root,
+            // if u's child v cannot reach vertex above u
+            // unless through u, then u is articulation vertex
             else if (parent[u] >= 0 && low[v] >= dfn[u]) {
                 users[u].is_arti = true;
             }
         } else {
-            /* vertex v has been visited, that is to say,
-             * edge (u,v) is not in DFS tree
-             */
+            // vertex v has been visited, edge (u,v) is not in DFS tree
             if (v != parent[u]) {
                 low[u] = min(low[u], dfn[v]);
             }
