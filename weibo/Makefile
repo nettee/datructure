@@ -7,7 +7,10 @@ weibo: $(OBJS)
 	g++ -o weibo $(OBJS) $(CFLAGS) 
 
 run: weibo
-	./weibo -f test/newfriends.txt -a test/at.txt 2>&1 | tee log.txt
+	./weibo -f data/newfriends.txt -a data/at.txt 2>&1 | tee log.txt
+
+test: weibo
+	./weibo -f test/friends.txt -a test/at.txt 2>&1 | tee log.txt
 
 gdb:
 	g++ -o weibo $(SRCS) $(CFLAGS)
