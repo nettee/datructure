@@ -56,7 +56,7 @@ void Network::dfs(int u) {
              * then u is articulation vertex
              */
             if (parent[u] == -1 && num_child > 1) {
-                cout << "arti-node: " << users[u].uid << endl;
+                users[u].is_arti = true;
             }
 
             /* case 2:
@@ -65,7 +65,7 @@ void Network::dfs(int u) {
              * unless through u, then u is articulation vertex
              */
             else if (parent[u] >= 0 && low[v] >= dfn[u]) {
-                cout << "arti-node: " << users[u].uid << endl;
+                users[u].is_arti = true;
             }
         } else {
             /* vertex v has been visited, that is to say,

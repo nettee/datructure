@@ -26,13 +26,14 @@ typedef std::list<Friend> List;
 /* User definition is like Vertex in normal graph */
 struct User {
     int uid;
+    bool is_arti;  // articulation vertex, for circle dividing 
     List friends;
 
     /* default construction function for new in Network
      * uid is initialized to 0, which is never valid
      */
-    User() { uid = 0; }
-    User(int id) { uid = id; }
+    User(): is_arti(false) { uid = 0; }
+    User(int id): is_arti(false) { uid = id; }
 
     /* add a friend of id "uid" into friends list.
      * return true if a new friend is added
@@ -68,7 +69,8 @@ public:
     bool add_friends(int uid1, int uid2);
     bool add_closeness(int ater, int atee);
 
-    void output();
+    void print_network();
+    void print_articulation();
     void analyse();
     void circle();
 

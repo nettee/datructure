@@ -42,11 +42,12 @@ void main_loop(Network *net)
             split_at(s1, d1, d2);
             cout << d1 << " @ " << d2 << endl;
         } else if (tokens[0] == "show") {
-            net->output();
+            net->print_network();
         } else if (tokens[0] == "analyse") {
             net->analyse();
         } else if (tokens[0] == "circle") {
             net->circle();
+            net->print_articulation();
         } else {
             cout << "invalid command '" << cmd << "'\n";
         }

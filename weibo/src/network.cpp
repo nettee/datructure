@@ -80,7 +80,7 @@ int Network::find_create(int uid) {
     return users.size() - 1;
 }
 
-void Network::output() {
+void Network::print_network() {
     for (int i = 0; i < users.size(); i++) {
         cout << "user " << users[i].uid << ":";
         for (List::const_iterator it = users[i].friends.begin(); it != users[i].friends.end(); ++it) {
@@ -91,8 +91,20 @@ void Network::output() {
     }
 }
 
+void Network::print_articulation() {
+    cout << "articulation nodes:";
+    for (vector<User>::const_iterator it = users.begin();
+            it != users.end(); ++it) {
+        if (it->is_arti) {
+            cout << " " << it->uid;
+        }
+    }
+    cout << endl;
+}
+
 void Network::analyse() {
     return;
     cout << "number of users: " << num_user() << endl;
 //    cout << "number of relationships: " << num_rel << endl;
 }
+
