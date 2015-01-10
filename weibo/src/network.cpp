@@ -49,8 +49,8 @@ bool Network::add_closeness(int uid1, int uid2) {
     if (uid1 == uid2)
         return false;
 
-    int idx1 = find(uid1);
-    int idx2 = find(uid2);
+    int idx1 = find_no_create(uid1);
+    int idx2 = find_no_create(uid2);
 
     users[idx1].add_closeness_with(idx2, 3);
     users[idx2].add_closeness_with(idx1, 1);
@@ -58,7 +58,7 @@ bool Network::add_closeness(int uid1, int uid2) {
     return true;
 }
 
-int Network::find(int uid) {
+int Network::find_no_create(int uid) {
     for (int i = 0; i < users.size(); i++) {
         if (users[i].uid == uid) {
             return i;
@@ -78,6 +78,35 @@ int Network::find_create(int uid) {
     User u(uid);
     users.push_back(u);
     return users.size() - 1;
+}
+
+bool Network::enter_user(int uid) {
+    int idx = find_no_create(uid);
+    if (idx == -1) {
+        cout << "user " << uid << " does not exist" << endl;
+        return false;
+    }
+    cout << "user " << users[idx].uid << ":";
+    for (List::const_iterator it = users[idx].friends.begin(); it != users[idx].friends.end(); ++it) {
+        cout << " " << users[it->dest].uid;
+        cout << "(" << it->closeness << ")"; 
+    }
+    cout << endl;
+    return true;
+}
+
+bool Network::enter_circle(int cid) {
+    if (cid < 0 || cid >= circles.size()) {
+        cout << "circle " << cid << " does not exist" << endl;
+        return false;
+    }
+    cout << "Circle[" << cid << "]:";
+    for (Circle::const_iterator it = circles[cid].begin();
+            it != circles[cid].end(); ++it) {
+        cout << " " << users[*it].uid;
+    }
+    cout << endl;
+    return true;
 }
 
 void Network::print_network() {

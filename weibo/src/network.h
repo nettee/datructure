@@ -81,6 +81,9 @@ public:
     bool add_friends(int uid1, int uid2);
     bool add_closeness(int ater, int atee);
 
+    bool enter_user(int uid);
+    bool enter_circle(int cid);
+
     void print_network();
     void print_articulation();
     void print_circle();
@@ -97,7 +100,7 @@ private:
      * "find" will return -1 if vertex not found
      * "find_create" will create a new vertex
      */
-    int find(int uid);
+    int find_no_create(int uid);
     int find_create(int uid);
 
     // for DFS use
