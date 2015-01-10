@@ -48,6 +48,7 @@ void main_loop(Network *net)
         } else if (tokens[0] == "circle") {
             net->circle();
             net->print_articulation();
+            net->print_circle();
         } else {
             cout << "invalid command '" << cmd << "'\n";
         }

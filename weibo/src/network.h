@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <list>
+#include <set>
 
 /* Friend definition is like Edge in normal graph */
 struct Friend {
@@ -68,6 +69,8 @@ struct User {
     }
 };
 
+typedef std::set<int> Circle;
+
 class Network {
 public:
     /* read users from cin, establish a network 
@@ -80,6 +83,7 @@ public:
 
     void print_network();
     void print_articulation();
+    void print_circle();
     void analyse();
     void circle();
 
@@ -87,6 +91,7 @@ public:
 
 private:
     std::vector<User> users;
+    std::vector<Circle> circles;
 
     /* search in veritices for given uid, return index of vertex
      * "find" will return -1 if vertex not found

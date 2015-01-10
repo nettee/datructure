@@ -2,8 +2,19 @@
 #include "stack.h"
 
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
+
+bool circle_compare(const Circle& c1, const Circle& c2) {
+    if (c1.size() > c2.size()) {
+        return true;
+    } else if (c1.size() < c2.size()) {
+        return false;
+    } else {
+        return *(c1.begin()) > *(c2.begin());
+    }
+}
 
 void Network::circle() {
     int n = num_user();
@@ -20,8 +31,21 @@ void Network::circle() {
     }
 
     Stack<Rel> stack;
-
     dfs(0, stack);
+
+    // sort circles to decreasing order of length
+    sort(circles.begin(), circles.end(), circle_compare);
+}
+
+void Network::print_circle() {
+    for (int i = 0; i < circles.size(); i++) {
+        cout << "Circle[" << i << "]:";
+        for (Circle::const_iterator it = circles[i].begin();
+                it != circles[i].end(); ++it) {
+            cout << " " << users[*it].uid;
+        }
+        cout << endl;
+    }
 }
 
 /* depth-first search */
@@ -60,36 +84,31 @@ void Network::dfs(int u, Stack<Rel>& stack) {
             // unless through u, then u is articulation vertex
                     || (parent[u] >= 0 && low[v] >= dfn[u])) {
                 users[u].is_arti = true;
-                cout << "Circle:";
                 Rel r;
+                Circle c;
                 do {
                     stack.pop(r);
-                    cout << " (" << users[r.src].uid << ", " << users[r.dest].uid << ")";
+                    c.insert(r.src);
+                    c.insert(r.dest);
                 } while (!((r.src == u && r.dest == v) || (r.src == v && r.dest == u)));
-                cout << endl;
+                circles.push_back(c);
             }
         } else {
             // vertex v has been visited, edge (u,v) is not in DFS tree
             if (v != parent[u]) {
-                stack.push(Rel(u, v));
+//                stack.push(Rel(u, v));
                 low[u] = min(low[u], dfn[v]);
             }
         }
     }
     if (parent[u] == -1) {
-        cout << "Circle:";
         Rel r;
+        Circle c;
         do {
             stack.pop(r);
-            cout << " (" << users[r.src].uid << ", " << users[r.dest].uid << ")";
+            c.insert(r.src);
+            c.insert(r.dest);
         } while (!stack.empty());
-        cout << endl;
+        circles.push_back(c);
     }
 }
-
-
-        
-
-
-
-
