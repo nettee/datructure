@@ -7,12 +7,11 @@
 #define _STACK_H_
 
 template <typename T>
-struct StackNode{
+struct StackNode {
     T val;
     StackNode *next;
-    StackNode(T data) {
+    StackNode(T data): next(NULL) {
         val = data;
-        next = NULL;
     }
 };
 
@@ -39,9 +38,11 @@ public:
     }
 
     void clear() {
-        T x;
-        while (!empty()) {
-            pop(x);
+        StackNode<T> *p = head;
+        while (p != NULL) {
+            StackNode<T> *q = p;
+            p = p->next;
+            delete q;
         }
     }
 
@@ -52,7 +53,7 @@ public:
         std::cout << std::endl;
     }
 private:
-    T *head;
+    StackNode<T> *head;
 };
 
 #endif

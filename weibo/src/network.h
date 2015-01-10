@@ -1,6 +1,8 @@
 #ifndef __NETWORK_H__
 #define __NETWORK_H__
 
+#include "stack.h"
+
 #include <iostream>
 #include <cassert>
 #include <string>
@@ -22,6 +24,13 @@ struct Friend {
 };
 
 typedef std::list<Friend> List;
+
+struct Rel {  // relationship
+    int src;
+    int dest;
+    Rel(): src(-1), dest(-1) {}
+    Rel(int a, int b) { src = a; dest = b; }
+};
 
 /* User definition is like Vertex in normal graph */
 struct User {
@@ -91,7 +100,7 @@ private:
     int *dfn;
     int *low;
     int *parent;
-    void dfs(int u);
+    void dfs(int u, Stack<Rel>& s);
 };
 
 #endif
