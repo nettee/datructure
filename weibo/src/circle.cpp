@@ -17,6 +17,9 @@ bool circle_compare(const Circle& c1, const Circle& c2) {
 }
 
 void Network::divide_circle() {
+    /* divide a circle: according to bi-connected component in a graph
+     * using Tarjan algorithm to find out articulation vertices
+     */
     int n = num_user();
     visited = new bool[n];
     dfn = new int[n];  // DFS Number

@@ -32,7 +32,7 @@ struct Rel {  // relationship
 struct User {
     int uid;
     bool is_arti;  // articulation vertex, for circle dividing 
-    Friend *friends;
+    Friend *friends;  // adjancent list, single-linked list
 
     /* default construction function for new in Network
      * uid is initialized to 0, which is never valid
@@ -40,7 +40,7 @@ struct User {
     User(): uid(-1), is_arti(false), friends(NULL) {}
     User(int id): is_arti(false), friends(NULL) { uid = id; }
 
-    int hotness() {
+    int activeness() {
         int acc = 0;
         for (Friend *f = friends; f != NULL; f = f->next) {
             acc += f->closeness;
