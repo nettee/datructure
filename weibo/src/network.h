@@ -99,7 +99,10 @@ public:
     void print_articulation();
     void print_circle();
 
-    void top_user();
+    /* find and print most active users */
+    void top_user(int n);
+    /* find and print most active circles */
+    void top_circle(int n);
 
     int num_user() { return users.size(); }
 

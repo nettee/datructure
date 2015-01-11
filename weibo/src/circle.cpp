@@ -48,6 +48,17 @@ void Network::print_circle() {
     }
 }
 
+void Network::top_circle(int n) {
+    for (int i = 0; i < n && i < circles.size(); i++) {
+        cout << "Circle[" << i << "]:";
+        for (Circle::const_iterator it = circles[i].begin();
+                it != circles[i].end(); ++it) {
+            cout << " " << users[*it].uid;
+        }
+        cout << endl;
+    }
+}
+
 /* depth-first search */
 void Network::dfs(int u, Stack<Rel>& stack) {
     static int counter = 0; // traversing order of DFS
@@ -96,7 +107,6 @@ void Network::dfs(int u, Stack<Rel>& stack) {
         } else {
             // vertex v has been visited, edge (u,v) is not in DFS tree
             if (v != parent[u]) {
-//                stack.push(Rel(u, v));
                 low[u] = min(low[u], dfn[v]);
             }
         }

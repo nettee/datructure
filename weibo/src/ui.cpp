@@ -81,21 +81,31 @@ void main_loop(Network *net)
             mode = GLOBAL;
             id = -1;
 
-        } else if (tokens[0] == "user") {
-            net->print_user();
-        } else if (tokens[0] == "circle") {
-            net->print_articulation();
-            net->print_circle();
+        } else if (tokens[0] == "all") {
+            if (tokens[1] == "users") {
+                net->print_user();
+            } else if (tokens[1] == "circles") {
+                net->print_articulation();
+                net->print_circle();
+            }
 
         } else if (tokens[0] == "top") {
             if (tokens.size() < 2) {
                 cout << "top: too few arguments" << endl;
                 continue;
-            }
-            if (tokens[1] == "user") {
-                net->top_user();
-            } else if (tokens[1] == "circle") {
-                net->top_user();
+            } else if (tokens.size() == 2) {
+                if (tokens[1] == "users") {
+                    net->top_user(10);
+                } else if (tokens[1] == "circles") {
+                    net->top_circle(5);
+                }
+            } else {
+                int n = atoi(tokens[1].c_str());
+                if (tokens[2] == "users") {
+                    net->top_user(n);
+                } else if (tokens[2] == "circles") {
+                    net->top_circle(n);
+                }
             }
 
         } else {

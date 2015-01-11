@@ -22,9 +22,11 @@ struct UserHot {
     }
 };
 
-void Network::top_user() {
-    if (users.size() < 15) {
-        cout << "too few users" << endl;
+void Network::top_user(int n) {
+    if (users.size() <= n) {
+        cout << "Error: there are altogether "
+            << users.size() << "users" << endl;
+        return;
     }
     set<UserHot> s;
     for (int i = 0; i < users.size(); i++) {
@@ -33,7 +35,7 @@ void Network::top_user() {
         s.insert(UserHot(uid, hotness));
     }
     set<UserHot>::const_reverse_iterator rit = s.rbegin();
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < n; i++) {
         cout << "user " << rit->uid << ": ";
         cout << "hotness " << rit->hotness << endl;
         ++rit;
