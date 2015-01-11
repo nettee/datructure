@@ -16,7 +16,7 @@ bool circle_compare(const Circle& c1, const Circle& c2) {
     }
 }
 
-void Network::circle() {
+void Network::divide_circle() {
     int n = num_user();
     visited = new bool[n];
     dfn = new int[n];  // DFS Number

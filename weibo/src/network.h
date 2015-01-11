@@ -45,6 +45,15 @@ struct User {
     User(): is_arti(false) { uid = 0; }
     User(int id): is_arti(false) { uid = id; }
 
+    int hotness() {
+        int acc = 0;
+        for (List::const_iterator it = friends.begin();
+                it != friends.end(); ++it) {
+            acc += it->closeness;
+        }
+        return acc;
+    }
+
     /* add a friend of id "uid" into friends list.
      * return true if a new friend is added
      * return false if friend already exist
@@ -84,11 +93,13 @@ public:
     bool enter_user(int uid);
     bool enter_circle(int cid);
 
-    void print_network();
+    void divide_circle();
+
+    void print_user();
     void print_articulation();
     void print_circle();
-    void analyse();
-    void circle();
+
+    void top_user();
 
     int num_user() { return users.size(); }
 

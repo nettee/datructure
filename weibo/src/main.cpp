@@ -28,6 +28,8 @@ int main(int argc, char *argv[])
     net->add_at(fs_at);
     fs_friends.close();
     fs_at.close();
+
+    net->divide_circle();
     
     main_loop(net);
 

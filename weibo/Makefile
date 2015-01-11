@@ -8,8 +8,8 @@ TEST_F_FILE = test/friends-1
 weibo: $(OBJS)
 	g++ -o weibo $(OBJS) $(CFLAGS) 
 
-# clang:
-# 	clang++ -o weibo $(CFLAGS) $(SRCS)
+clang:
+	clang++ -o weibo $(CFLAGS) $(SRCS)
 
 run: weibo
 	./weibo -f data/newfriends.txt -a data/at.txt 2>&1 | tee log.txt

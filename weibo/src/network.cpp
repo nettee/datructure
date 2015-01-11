@@ -53,7 +53,7 @@ bool Network::add_closeness(int uid1, int uid2) {
     int idx2 = find_no_create(uid2);
 
     users[idx1].add_closeness_with(idx2, 3);
-    users[idx2].add_closeness_with(idx1, 1);
+    users[idx2].add_closeness_with(idx1, 3);
 
     return true;
 }
@@ -109,9 +109,12 @@ bool Network::enter_circle(int cid) {
     return true;
 }
 
-void Network::print_network() {
+void Network::print_user() {
     for (int i = 0; i < users.size(); i++) {
         cout << "user " << users[i].uid << ":";
+//        if (users[i].is_arti) {
+//            cout << " [a]";
+//        }
         for (List::const_iterator it = users[i].friends.begin(); it != users[i].friends.end(); ++it) {
             cout << " " << users[it->dest].uid;
             cout << "(" << it->closeness << ")"; 
@@ -130,10 +133,3 @@ void Network::print_articulation() {
     }
     cout << endl;
 }
-
-void Network::analyse() {
-    return;
-    cout << "number of users: " << num_user() << endl;
-//    cout << "number of relationships: " << num_rel << endl;
-}
-

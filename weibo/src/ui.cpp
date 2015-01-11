@@ -81,15 +81,22 @@ void main_loop(Network *net)
             mode = GLOBAL;
             id = -1;
 
-        } else if (tokens[0] == "show") {
-            net->print_network();
-        } else if (tokens[0] == "analyse") {
-            net->analyse();
-
+        } else if (tokens[0] == "user") {
+            net->print_user();
         } else if (tokens[0] == "circle") {
-            net->circle();
             net->print_articulation();
             net->print_circle();
+
+        } else if (tokens[0] == "top") {
+            if (tokens.size() < 2) {
+                cout << "top: too few arguments" << endl;
+                continue;
+            }
+            if (tokens[1] == "user") {
+                net->top_user();
+            } else if (tokens[1] == "circle") {
+                net->top_user();
+            }
 
         } else {
             cout << "invalid command '" << cmd << "'\n";
