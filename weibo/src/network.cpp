@@ -87,9 +87,9 @@ bool Network::enter_user(int uid) {
         return false;
     }
     cout << "user " << users[idx].uid << ":";
-    for (List::const_iterator it = users[idx].friends.begin(); it != users[idx].friends.end(); ++it) {
-        cout << " " << users[it->dest].uid;
-        cout << "(" << it->closeness << ")"; 
+    for (Friend *f = users[idx].friends; f != NULL; f = f->next) {
+        cout << " " << users[f->dest].uid;
+        cout << "(" << f->closeness << ")"; 
     }
     cout << endl;
     return true;
@@ -112,12 +112,9 @@ bool Network::enter_circle(int cid) {
 void Network::print_user() {
     for (int i = 0; i < users.size(); i++) {
         cout << "user " << users[i].uid << ":";
-//        if (users[i].is_arti) {
-//            cout << " [a]";
-//        }
-        for (List::const_iterator it = users[i].friends.begin(); it != users[i].friends.end(); ++it) {
-            cout << " " << users[it->dest].uid;
-            cout << "(" << it->closeness << ")"; 
+        for (Friend *f = users[i].friends; f != NULL; f = f->next) {
+            cout << " " << users[f->dest].uid;
+            cout << "(" << f->closeness << ")"; 
         }
         cout << endl;
     }

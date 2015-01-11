@@ -71,9 +71,8 @@ void Network::dfs(int u, Stack<Rel>& stack) {
     low[u] = counter;
 
     // for each v adjancent to u
-    for (List::const_iterator it = users[u].friends.begin();
-            it != users[u].friends.end(); ++it) {
-        int v = it->dest;
+    for (Friend *f = users[u].friends; f != NULL; f = f->next) {
+        int v = f->dest;
 
         if (!visited[v]) {
             // vertex v is child of u, and (u,v) is an edge in DFS tree

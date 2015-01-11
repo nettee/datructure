@@ -16,15 +16,10 @@ struct Friend {
     int closeness;
     Friend *next;
 
+    Friend(): dest(-1), closeness(0), next(NULL) {}
     /* "dest" and "idx" are defined for Network */
-    Friend(int idx) {
-        dest = idx;
-        closeness = 5;
-        next = NULL;
-    }
+    Friend(int idx): closeness(5), next(NULL) { dest = idx; }
 };
-
-typedef std::list<Friend> List;
 
 struct Rel {  // relationship
     int src;
@@ -37,19 +32,18 @@ struct Rel {  // relationship
 struct User {
     int uid;
     bool is_arti;  // articulation vertex, for circle dividing 
-    List friends;
+    Friend *friends;
 
     /* default construction function for new in Network
      * uid is initialized to 0, which is never valid
      */
-    User(): is_arti(false) { uid = 0; }
-    User(int id): is_arti(false) { uid = id; }
+    User(): uid(-1), is_arti(false), friends(NULL) {}
+    User(int id): is_arti(false), friends(NULL) { uid = id; }
 
     int hotness() {
         int acc = 0;
-        for (List::const_iterator it = friends.begin();
-                it != friends.end(); ++it) {
-            acc += it->closeness;
+        for (Friend *f = friends; f != NULL; f = f->next) {
+            acc += f->closeness;
         }
         return acc;
     }
@@ -59,20 +53,22 @@ struct User {
      * return false if friend already exist
      */
     bool add_rel_with(int idx) {
-        for (List::const_iterator it = friends.begin();
-                it != friends.end(); ++it) {
-            if (it->dest == idx) {
+        for (Friend *f = friends; f != NULL; f = f->next) {
+            if (f->dest == idx) {
                 return false;
             }
         }
-        friends.push_front(Friend(idx));
+        /* insert into the front of list */
+        Friend *q= new Friend(idx);
+        q->next = friends;
+        friends = q;
         return true;
     }
 
     void add_closeness_with(int idx, int incr) {
-        for (List::iterator it = friends.begin(); it != friends.end(); ++it) {
-            if (it->dest == idx) {
-                it->closeness += incr;
+        for (Friend *f = friends; f != NULL; f = f->next) {
+            if (f->dest == idx) {
+                f->closeness += incr;
             }
         }
     }
