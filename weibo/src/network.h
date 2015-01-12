@@ -3,6 +3,7 @@
 
 #include "stack.h"
 #include "vector.h"
+#include "set.h"
 
 #include <iostream>
 #include <cassert>
