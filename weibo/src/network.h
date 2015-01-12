@@ -3,13 +3,8 @@
 
 #include "stack.h"
 #include "vector.h"
-#include "set.h"
 
 #include <iostream>
-#include <cassert>
-#include <string>
-#include <vector>
-#include <list>
 #include <set>
 
 /* Friend definition is like Edge in normal graph */
@@ -130,7 +125,6 @@ public:
 private:
     Vector<User> users;
     Vector<Circle> circles;
-//    std::vector<Circle> circles;
 
     /* search in veritices for given uid, return index of vertex
      * "find" will return -1 if vertex not found
