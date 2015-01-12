@@ -93,12 +93,12 @@ void main_loop(Network *net)
             } else if (tokens[1] == "circles") {
                 if (mode == GLOBAL) {
                     net->print_articulation();
-                    net->print_circle();
+                    net->print_all_circle();
                 } else {
                     cout << "'all circles': wrong mode" << endl;
                 }
             } else if (tokens[1] == "relations") {
-                cout << "building..." << endl;
+                net->print_all_rel();
             } else {
                 cout << "all: invalid arguments" << endl;
             }
@@ -109,22 +109,22 @@ void main_loop(Network *net)
                 continue;
             } else if (tokens.size() == 2) {
                 if (tokens[1] == "users") {
-                    net->top_user(10);
+                    net->print_top_user(10);
                 } else if (tokens[1] == "circles") {
-                    net->top_circle(5);
+                    net->print_top_circle(5);
                 } else if (tokens[1] == "relations") {
-                    net->top_rel(12);
+                    net->print_top_rel(12);
                 } else {
                     cout << "top: invalid arguments" << endl;
                 }
             } else {
                 int n = atoi(tokens[1].c_str());
                 if (tokens[2] == "users") {
-                    net->top_user(n);
+                    net->print_top_user(n);
                 } else if (tokens[2] == "circles") {
-                    net->top_circle(n);
+                    net->print_top_circle(n);
                 } else if (tokens[2] == "relations") {
-                    net->top_rel(n);
+                    net->print_top_rel(n);
                 } else {
                     cout << "top: invalid arguments" << endl;
                 }

@@ -15,16 +15,27 @@ void Network::build_rel() {
     }
 }
 
-void Network::top_rel(int n) {
+void Network::print_rel(const Rel& r) {
+    cout << "(user " << users[r.src].uid 
+        << ", user " << users[r.dest].uid
+        << "): closeness " << r.closeness << endl;
+}
+
+void Network::print_all_rel() {
+    for (set<Rel>::const_reverse_iterator rit = rels.rbegin();
+            rit != rels.rend(); ++rit) {
+        print_rel(*rit);
+    }
+}
+
+void Network::print_top_rel(int n) {
     if (rels.size() < n) {
         cout << "Warning: asking for " << n << " relations, only " 
             << rels.size() << " relations in all." << endl;
     }
     set<Rel>::const_reverse_iterator rit = rels.rbegin();
     for (int i = 0; i < n; i++) {
-        cout << "(user " << users[rit->src].uid 
-            << ", user " << users[rit->dest].uid
-            << "): closeness " << rit->closeness << endl;
+        print_rel(*rit);
         ++rit;
         if (rit == rels.rend()) {
             break;

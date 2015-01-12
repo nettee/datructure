@@ -40,25 +40,24 @@ void Network::divide_circle() {
     sort(circles.begin(), circles.end(), circle_compare);
 }
 
-void Network::print_circle() {
+void Network::print_circle(int idx) {
+    cout << "Circle[" << idx << "]:";
+    for (Circle::const_iterator it = circles[idx].begin();
+            it != circles[idx].end(); ++it) {
+        cout << " " << users[*it].uid;
+    }
+    cout << endl;
+}
+
+void Network::print_all_circle() {
     for (int i = 0; i < circles.size(); i++) {
-        cout << "Circle[" << i << "]:";
-        for (Circle::const_iterator it = circles[i].begin();
-                it != circles[i].end(); ++it) {
-            cout << " " << users[*it].uid;
-        }
-        cout << endl;
+        print_circle(i);
     }
 }
 
-void Network::top_circle(int n) {
+void Network::print_top_circle(int n) {
     for (int i = 0; i < n && i < circles.size(); i++) {
-        cout << "Circle[" << i << "]:";
-        for (Circle::const_iterator it = circles[i].begin();
-                it != circles[i].end(); ++it) {
-            cout << " " << users[*it].uid;
-        }
-        cout << endl;
+        print_circle(i);
     }
 }
 

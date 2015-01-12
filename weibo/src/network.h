@@ -112,17 +112,18 @@ public:
 
     void print_user(int idx);
     void print_all_user();
+    void print_top_user(int n);
+
     void print_user_in_circle(int cidx);
 
     void print_articulation();
-    void print_circle();
+    void print_circle(int cidx);
+    void print_all_circle();
+    void print_top_circle(int n);
 
-    /* find and print most active users */
-    void top_user(int n);
-    /* find and print most close relations */
-    void top_rel(int n);
-    /* find and print most active circles */
-    void top_circle(int n);
+    void print_rel(const Rel& r);
+    void print_all_rel();
+    void print_top_rel(int n);
 
     int num_user() { return users.size(); }
 
