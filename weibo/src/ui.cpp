@@ -81,6 +81,18 @@ void main_loop(Network *net)
             mode = GLOBAL;
             id = -1;
 
+        } else if (tokens[0] == "users") {
+            if (mode == CIRCLE) {
+                cout << net->num_user_in_circle(id)
+                    << " users in circle[" << id << "]." << endl;
+            } else {
+                cout << net->num_user() << " users in total." << endl;
+            }
+        } else if (tokens[0] == "circles") {
+            cout << net->num_circle() << " circles in total." << endl;
+        } else if (tokens[0] == "relations") {
+            cout << net->num_rel() << " relations in total." << endl;
+
         } else if (tokens[0] == "all") {
             if (tokens[1] == "users") {
                 if (mode == GLOBAL) {

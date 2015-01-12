@@ -131,8 +131,9 @@ public:
     void print_all_rel_in_circle(int cidx);
     void print_top_rel_in_circle(int cidx, int n);
 
-    int num_user() { return users.size(); }
     int num_circle() { return circles.size(); }
+    int num_user() { return users.size(); }
+    int num_user_in_circle(int cidx) { return circles[cidx].size(); }
     int num_rel() { return rels.size(); }
 
 private:
