@@ -87,6 +87,10 @@ void main_loop(Network *net)
             } else if (tokens[1] == "circles") {
                 net->print_articulation();
                 net->print_circle();
+            } else if (tokens[1] == "relations") {
+                cout << "building..." << endl;
+            } else {
+                cout << "all: invalid arguments" << endl;
             }
 
         } else if (tokens[0] == "top") {
@@ -100,6 +104,8 @@ void main_loop(Network *net)
                     net->top_circle(5);
                 } else if (tokens[1] == "relations") {
                     net->top_rel(12);
+                } else {
+                    cout << "top: invalid arguments" << endl;
                 }
             } else {
                 int n = atoi(tokens[1].c_str());
@@ -109,6 +115,8 @@ void main_loop(Network *net)
                     net->top_circle(n);
                 } else if (tokens[2] == "relations") {
                     net->top_rel(n);
+                } else {
+                    cout << "top: invalid arguments" << endl;
                 }
             }
 

@@ -6,9 +6,13 @@
 template <typename E>
 class Vector {
 public:
+    typedef E *iterator;
+    typedef const E *const_iterator;
+
     Vector(): the_size(0) {
         data = new E[16];
-        capacity = 16
+        capacity = 16;
+    }
     
     ~Vector() {
         delete[] data;
@@ -16,6 +20,11 @@ public:
 
     E& operator[](size_t i) { return data[i]; }
     const E& operator[](size_t i) const { return data[i]; }
+
+    iterator begin() { return data; }
+    const_iterator begin() const { return data; }
+    iterator end() { return data + the_size; }
+    const_iterator end() const { return data + the_size; }
 
     void clear() { the_size = 0; }
     size_t size() const { return the_size; }

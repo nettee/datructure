@@ -128,7 +128,8 @@ public:
 
 private:
     Vector<User> users;
-    std::vector<Circle> circles;
+    Vector<Circle> circles;
+//    std::vector<Circle> circles;
 
     /* search in veritices for given uid, return index of vertex
      * "find" will return -1 if vertex not found
