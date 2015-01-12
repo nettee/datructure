@@ -30,14 +30,54 @@ void Network::print_all_rel() {
 
 void Network::print_top_rel(int n) {
     if (rels.size() < n) {
-        cout << "Warning: asking for " << n << " relations, only " 
-            << rels.size() << " relations in all." << endl;
+        cout << "Warning: there are altogether "
+            << rels.size() << " relations" << endl;
     }
     set<Rel>::const_reverse_iterator rit = rels.rbegin();
     for (int i = 0; i < n; i++) {
         print_rel(*rit);
         ++rit;
         if (rit == rels.rend()) {
+            break;
+        }
+    }
+}
+
+void Network::print_all_rel_in_circle(int cidx) {
+    // filter relations in global set
+    set<Rel> s;
+    for (set<Rel>::const_iterator it = rels.begin();
+            it != rels.end(); ++it) {
+        if (user_in_circle(it->src, cidx) 
+                && user_in_circle(it->dest, cidx)) {
+            s.insert(*it);
+        }
+    }
+    for (set<Rel>::const_reverse_iterator rit = s.rbegin();
+            rit != s.rend(); ++rit) {
+        print_rel(*rit);
+    }
+}
+
+void Network::print_top_rel_in_circle(int cidx, int n) {
+    set<Rel> s;
+    for (set<Rel>::const_iterator it = rels.begin();
+            it != rels.end(); ++it) {
+        if (user_in_circle(it->src, cidx) 
+                && user_in_circle(it->dest, cidx)) {
+            s.insert(*it);
+        }
+    }
+
+    if (s.size() < n) {
+        cout << "Warning: there are altogether "
+            << s.size() << " relations" << endl;
+    }
+    set<Rel>::const_reverse_iterator rit = s.rbegin();
+    for (int i = 0; i < n; i++) {
+        print_rel(*rit);
+        ++rit;
+        if (rit == s.rend()) {
             break;
         }
     }

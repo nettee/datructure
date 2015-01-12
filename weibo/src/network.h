@@ -104,28 +104,36 @@ public:
     bool add_friends(int uid1, int uid2);
     bool add_closeness(int ater, int atee);
 
-    bool enter_user(int uid);
-    bool enter_circle(int cid);
+    int closeness_of(int idx1, int idx2);
+    bool are_friends(int uid1, int uid2);
+    bool are_friends_by_index(int idx1, int idx2);
 
-    void divide_circle();
+    void build_circle();
     void build_rel();
 
-    void print_user(int idx);
-    void print_all_user();
-    void print_top_user(int n);
-
-    void print_user_in_circle(int cidx);
+    bool enter_user(int uid);
+    bool enter_circle(int cid);
 
     void print_articulation();
     void print_circle(int cidx);
     void print_all_circle();
     void print_top_circle(int n);
 
+    void print_user(int idx);
+    void print_all_user();
+    void print_top_user(int n);
+    void print_all_user_in_circle(int cidx);
+    void print_top_user_in_circle(int cidx, int n);
+
     void print_rel(const Rel& r);
     void print_all_rel();
     void print_top_rel(int n);
+    void print_all_rel_in_circle(int cidx);
+    void print_top_rel_in_circle(int cidx, int n);
 
     int num_user() { return users.size(); }
+    int num_circle() { return circles.size(); }
+    int num_rel() { return rels.size(); }
 
 private:
     Vector<User> users;
@@ -138,6 +146,8 @@ private:
      */
     int find_no_create(int uid);
     int find_create(int uid);
+
+    bool user_in_circle(int uidx, int cidx);
 
     // for DFS use
     bool *visited;

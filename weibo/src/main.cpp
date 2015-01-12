@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     fs_friends.close();
     fs_at.close();
 
-    net->divide_circle();
+    net->build_circle();
     net->build_rel();
     
     main_loop(net);

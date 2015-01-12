@@ -24,9 +24,8 @@ struct UserHot {
 
 void Network::print_top_user(int n) {
     if (users.size() <= n) {
-        cout << "Error: there are altogether "
+        cout << "Warning: there are altogether "
             << users.size() << " users" << endl;
-        return;
     }
     set<UserHot> s;
     for (int i = 0; i < users.size(); i++) {
@@ -39,6 +38,9 @@ void Network::print_top_user(int n) {
         cout << "user " << rit->uid << ": ";
         cout << "activeness " << rit->activeness << endl;
         ++rit;
+        if (rit == s.rend()) {
+            break;
+        }
     }
 }
 
@@ -57,9 +59,33 @@ void Network::print_user(int idx) {
     cout << endl;
 }
 
-void Network::print_user_in_circle(int cidx) {
+void Network::print_all_user_in_circle(int cidx) {
     for (Circle::const_iterator it = circles[cidx].begin();
             it != circles[cidx].end(); ++it) {
         print_user(*it);
     }
 }
+
+void Network::print_top_user_in_circle(int cidx, int n) {
+    if (circles[cidx].size() <= n) {
+        cout << "Warning: there are altogether "
+            << circles[cidx].size() << " users" << endl;
+    }
+    set<UserHot> s;
+    for (Circle::const_iterator it = circles[cidx].begin();
+            it != circles[cidx].end(); ++it) {
+        int uid = users[*it].uid;
+        int activeness = users[*it].activeness();
+        s.insert(UserHot(uid, activeness));
+    }
+    set<UserHot>::const_reverse_iterator rit = s.rbegin();
+    for (int i = 0; i < n; i++) {
+        cout << "user " << rit->uid << ": ";
+        cout << "activeness " << rit->activeness << endl;
+        ++rit;
+        if (rit == s.rend()) {
+            break;
+        }
+    }
+}
+

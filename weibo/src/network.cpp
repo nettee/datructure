@@ -58,6 +58,47 @@ bool Network::add_closeness(int uid1, int uid2) {
     return true;
 }
 
+bool Network::are_friends_by_index(int idx1, int idx2) {
+    for (Friend *f = users[idx1].friends; f != NULL; f = f->next) {
+        if (f->dest == idx2) {
+            return true;
+        }
+    }
+    return false;
+}
+
+int Network::closeness_of(int idx1, int idx2) {
+    for (Friend *f = users[idx1].friends; f != NULL; f = f->next) {
+        if (f->dest == idx2) {
+            return f->closeness;
+        }
+    }
+    return -1;
+}
+
+bool Network::are_friends(int uid1, int uid2) {
+    if (uid1 == uid2) 
+        return false;
+
+    int idx1 = find_no_create(uid1);
+    int idx2 = find_no_create(uid2);
+
+    if (idx1 == -1 || idx2 == -1)
+        return false;
+
+    return are_friends_by_index(idx1, idx2);
+}
+
+bool Network::user_in_circle(int uidx, int cidx) {
+    for (Circle::const_iterator it = circles[cidx].begin();
+            it != circles[cidx].end(); ++it) {
+        if (*it == uidx) {
+            return true;
+        }
+    }
+    return false;
+}
+
 int Network::find_no_create(int uid) {
     for (int i = 0; i < users.size(); i++) {
         if (users[i].uid == uid) {

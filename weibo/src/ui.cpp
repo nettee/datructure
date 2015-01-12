@@ -86,7 +86,7 @@ void main_loop(Network *net)
                 if (mode == GLOBAL) {
                     net->print_all_user();
                 } else if (mode == CIRCLE) {
-                    net->print_user_in_circle(id);
+                    net->print_all_user_in_circle(id);
                 } else {
                     cout << "'all users': wrong mode" << endl;
                 }
@@ -98,7 +98,13 @@ void main_loop(Network *net)
                     cout << "'all circles': wrong mode" << endl;
                 }
             } else if (tokens[1] == "relations") {
-                net->print_all_rel();
+                if (mode == GLOBAL) {
+                    net->print_all_rel();
+                } else if (mode == CIRCLE) {
+                    net->print_all_rel_in_circle(id);
+                } else {
+                    cout << "'all relations': wrong mode" << endl;
+                }
             } else {
                 cout << "all: invalid arguments" << endl;
             }
@@ -109,22 +115,54 @@ void main_loop(Network *net)
                 continue;
             } else if (tokens.size() == 2) {
                 if (tokens[1] == "users") {
-                    net->print_top_user(10);
+                    if (mode == GLOBAL) {
+                        net->print_top_user(10);
+                    } else if (mode == CIRCLE) {
+                        net->print_top_user_in_circle(id, 10);
+                    } else {
+                        cout << "'top users': wrong mode" << endl;
+                    }
                 } else if (tokens[1] == "circles") {
-                    net->print_top_circle(5);
+                    if (mode == GLOBAL) {
+                        net->print_top_circle(5);
+                    } else {
+                        cout << "'top circles': wrong mode" << endl;
+                    }
                 } else if (tokens[1] == "relations") {
-                    net->print_top_rel(12);
+                    if (mode == GLOBAL) {
+                        net->print_top_rel(12);
+                    } else if (mode == CIRCLE) {
+                        net->print_top_rel_in_circle(id, 8);
+                    } else {
+                        cout << "'top relations': wrong mode" << endl;
+                    }
                 } else {
                     cout << "top: invalid arguments" << endl;
                 }
             } else {
                 int n = atoi(tokens[1].c_str());
                 if (tokens[2] == "users") {
-                    net->print_top_user(n);
+                    if (mode == GLOBAL) {
+                        net->print_top_user(n);
+                    } else if (mode == CIRCLE) {
+                        net->print_top_user_in_circle(id, n);
+                    } else {
+                        cout << "'top users': wrong mode" << endl;
+                    }
                 } else if (tokens[2] == "circles") {
-                    net->print_top_circle(n);
+                    if (mode == GLOBAL) {
+                        net->print_top_circle(n);
+                    } else {
+                        cout << "'top circles': wrong mode" << endl;
+                    }
                 } else if (tokens[2] == "relations") {
-                    net->print_top_rel(n);
+                    if (mode == GLOBAL) {
+                        net->print_top_rel(n);
+                    } else if (mode == CIRCLE) {
+                        net->print_top_rel_in_circle(id, n);
+                    } else {
+                        cout << "'top relations':wrong mode" << endl;
+                    }
                 } else {
                     cout << "top: invalid arguments" << endl;
                 }
