@@ -42,28 +42,24 @@ void Network::top_user(int n) {
     }
 }
 
-void Network::top_rel(int n) {
-    set<Rel> s;
+void Network::print_all_user() {
     for (int i = 0; i < users.size(); i++) {
-        for (Friend *f = users[i].friends; f != NULL; f = f->next) {
-            // add condition < to avoid repetition
-            if (i < f->dest) {
-                s.insert(Rel(i, f->dest, f->closeness));
-            }
-        }
+        print_user(i);
     }
-    if (s.size() < n) {
-        cout << "Warning: asking for " << n << " relations, only " 
-            << s.size() << " relations in all." << endl;
+}
+
+void Network::print_user(int idx) {
+    cout << "user " << users[idx].uid << ":";
+    for (Friend *f = users[idx].friends; f != NULL; f = f->next) {
+        cout << " " << users[f->dest].uid;
+        cout << "(" << f->closeness << ")"; 
     }
-    set<Rel>::const_reverse_iterator rit = s.rbegin();
-    for (int i = 0; i < n; i++) {
-        cout << "(user " << users[rit->src].uid 
-            << ", user " << users[rit->dest].uid
-            << "): closeness " << rit->closeness << endl;
-        ++rit;
-        if (rit == s.rend()) {
-            break;
-        }
+    cout << endl;
+}
+
+void Network::print_user_in_circle(int cidx) {
+    for (Circle::const_iterator it = circles[cidx].begin();
+            it != circles[cidx].end(); ++it) {
+        print_user(*it);
     }
 }

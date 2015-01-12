@@ -109,17 +109,6 @@ bool Network::enter_circle(int cid) {
     return true;
 }
 
-void Network::print_user() {
-    for (int i = 0; i < users.size(); i++) {
-        cout << "user " << users[i].uid << ":";
-        for (Friend *f = users[i].friends; f != NULL; f = f->next) {
-            cout << " " << users[f->dest].uid;
-            cout << "(" << f->closeness << ")"; 
-        }
-        cout << endl;
-    }
-}
-
 void Network::print_articulation() {
     cout << "articulation nodes:";
     for (int i = 0; i < users.size(); i++) {

@@ -83,10 +83,20 @@ void main_loop(Network *net)
 
         } else if (tokens[0] == "all") {
             if (tokens[1] == "users") {
-                net->print_user();
+                if (mode == GLOBAL) {
+                    net->print_all_user();
+                } else if (mode == CIRCLE) {
+                    net->print_user_in_circle(id);
+                } else {
+                    cout << "'all users': wrong mode" << endl;
+                }
             } else if (tokens[1] == "circles") {
-                net->print_articulation();
-                net->print_circle();
+                if (mode == GLOBAL) {
+                    net->print_articulation();
+                    net->print_circle();
+                } else {
+                    cout << "'all circles': wrong mode" << endl;
+                }
             } else if (tokens[1] == "relations") {
                 cout << "building..." << endl;
             } else {

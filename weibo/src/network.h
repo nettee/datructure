@@ -108,8 +108,12 @@ public:
     bool enter_circle(int cid);
 
     void divide_circle();
+    void build_rel();
 
-    void print_user();
+    void print_user(int idx);
+    void print_all_user();
+    void print_user_in_circle(int cidx);
+
     void print_articulation();
     void print_circle();
 
@@ -125,6 +129,7 @@ public:
 private:
     Vector<User> users;
     Vector<Circle> circles;
+    std::set<Rel> rels;
 
     /* search in veritices for given uid, return index of vertex
      * "find" will return -1 if vertex not found
