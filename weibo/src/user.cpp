@@ -25,7 +25,7 @@ struct UserHot {
 void Network::top_user(int n) {
     if (users.size() <= n) {
         cout << "Error: there are altogether "
-            << users.size() << "users" << endl;
+            << users.size() << " users" << endl;
         return;
     }
     set<UserHot> s;

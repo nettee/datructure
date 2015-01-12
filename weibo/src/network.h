@@ -2,6 +2,7 @@
 #define __NETWORK_H__
 
 #include "stack.h"
+#include "vector.h"
 
 #include <iostream>
 #include <cassert>
@@ -126,7 +127,7 @@ public:
     int num_user() { return users.size(); }
 
 private:
-    std::vector<User> users;
+    Vector<User> users;
     std::vector<Circle> circles;
 
     /* search in veritices for given uid, return index of vertex
