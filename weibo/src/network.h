@@ -21,11 +21,32 @@ struct Friend {
     Friend(int idx): closeness(5), next(NULL) { dest = idx; }
 };
 
-struct Rel {  // relationship
+struct Rel {  // relation
     int src;
     int dest;
-    Rel(): src(-1), dest(-1) {}
-    Rel(int a, int b) { src = a; dest = b; }
+    int closeness;
+
+    Rel(): src(-1), dest(-1), closeness(0) {}
+    Rel(int a, int b): closeness(1) { src = a; dest = b; }
+    Rel(int a, int b, int c) { src = a; dest = b; closeness = c; }
+
+    // overloaded comparison functions for top_relation use
+    bool operator<(const Rel& rhs) const {
+        return closeness < rhs.closeness
+            || closeness == rhs.closeness && src > rhs.src
+            || closeness == rhs.closeness 
+                && src == rhs.src && dest > rhs.dest;
+    }
+    bool operator>(const Rel& rhs) const {
+        return closeness > rhs.closeness
+            || closeness == rhs.closeness && src < rhs.src
+            || closeness == rhs.closeness 
+                && src == rhs.src && dest < rhs.dest;
+    }
+    bool operator==(const Rel& rhs) const {
+        return closeness == rhs.closeness 
+            && src == rhs.src && dest == rhs.dest;
+    }
 };
 
 /* User definition is like Vertex in normal graph */
@@ -97,6 +118,8 @@ public:
 
     /* find and print most active users */
     void top_user(int n);
+    /* find and print most close relations */
+    void top_rel(int n);
     /* find and print most active circles */
     void top_circle(int n);
 

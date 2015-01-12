@@ -122,10 +122,9 @@ void Network::print_user() {
 
 void Network::print_articulation() {
     cout << "articulation nodes:";
-    for (vector<User>::const_iterator it = users.begin();
-            it != users.end(); ++it) {
-        if (it->is_arti) {
-            cout << " " << it->uid;
+    for (int i = 0; i < users.size(); i++) {
+        if (users[i].is_arti) {
+            cout << " " << users[i].uid;
         }
     }
     cout << endl;

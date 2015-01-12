@@ -82,7 +82,7 @@ void Network::dfs(int u, Stack<Rel>& stack) {
             parent[v] = u;
             num_child++;
 
-            stack.push(Rel(u, v));
+            stack.push(Rel(u, v));  // no care about closeness in relationship
             dfs(v, stack);  // recursively do DFS on vertex v
 
             low[u] = min(low[u], low[v]);

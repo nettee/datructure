@@ -98,6 +98,8 @@ void main_loop(Network *net)
                     net->top_user(10);
                 } else if (tokens[1] == "circles") {
                     net->top_circle(5);
+                } else if (tokens[1] == "relations") {
+                    net->top_rel(12);
                 }
             } else {
                 int n = atoi(tokens[1].c_str());
@@ -105,6 +107,8 @@ void main_loop(Network *net)
                     net->top_user(n);
                 } else if (tokens[2] == "circles") {
                     net->top_circle(n);
+                } else if (tokens[2] == "relations") {
+                    net->top_rel(n);
                 }
             }
 
