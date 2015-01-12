@@ -1,4 +1,4 @@
-CFLAGS = -Wall -I include -ggdb
+CFLAGS = -Wall -g
 
 SRCS = $(shell find src/ -name "*.cpp")
 OBJS = $(SRCS:.cpp=.o)
