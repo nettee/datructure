@@ -4,6 +4,7 @@
 #include <string>
 #include <cassert>
 #include <stdexcept>
+#include <set>
 
 using namespace std;
 
@@ -87,6 +88,43 @@ bool Network::are_friends(int uid1, int uid2) {
         return false;
 
     return are_friends_by_index(idx1, idx2);
+}
+
+void Network::print_all_friends_with(int uid) {
+    int uidx = find_no_create(uid);
+    set<Friend> s;
+    for (Friend *f = users[uidx].friends; f != NULL; f = f->next) {
+        s.insert(*f);
+    }
+    cout << "All friends of user " << users[uidx].uid << ": " << endl;
+    for (set<Friend>::const_reverse_iterator rit = s.rbegin();
+            rit != s.rend(); ++rit) {
+        cout << "friend " << users[rit->dest].uid
+            << ": closeness " << rit->closeness << endl;
+    }
+}
+
+void Network::print_top_friends_with(int uid, int n) {
+    int uidx = find_no_create(uid);
+    set<Friend> s;
+    for (Friend *f = users[uidx].friends; f != NULL; f = f->next) {
+        s.insert(*f);
+    }
+    if (s.size() < n) {
+        cout << "Warning: there are altogether "
+            << s.size() << " friends" << endl;
+    }
+
+    cout << "Top " << n << " friends of user " << users[uidx].uid << ": " << endl;
+    set<Friend>::const_reverse_iterator rit = s.rbegin();
+    for (int i = 0; i < n; i++) {
+        cout << "friend " << users[rit->dest].uid
+            << ": closeness " << rit->closeness << endl;
+        ++rit;
+        if (rit == s.rend()) {
+            break;
+        }
+    }
 }
 
 bool Network::user_in_circle(int uidx, int cidx) {

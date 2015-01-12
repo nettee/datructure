@@ -16,6 +16,19 @@ struct Friend {
     Friend(): dest(-1), closeness(0), next(NULL) {}
     /* "dest" and "idx" are defined for Network */
     Friend(int idx): closeness(5), next(NULL) { dest = idx; }
+
+    // overload comparison functions for top_friends use
+    bool operator<(const Friend& rhs) const {
+        return closeness < rhs.closeness 
+            || closeness == rhs.closeness && dest > rhs.dest;
+    }
+    bool operator>(const Friend& rhs) const {
+        return closeness > rhs.closeness 
+            || closeness == rhs.closeness && dest < rhs.dest;
+    }
+    bool operator==(const Friend& rhs) const {
+        return closeness == rhs.closeness && dest == rhs.dest;
+    }
 };
 
 struct Rel {  // relation
@@ -130,6 +143,9 @@ public:
     void print_top_rel(int n);
     void print_all_rel_in_circle(int cidx);
     void print_top_rel_in_circle(int cidx, int n);
+
+    void print_all_friends_with(int uid);
+    void print_top_friends_with(int uid, int n);
 
     int num_circle() { return circles.size(); }
     int num_user() { return users.size(); }

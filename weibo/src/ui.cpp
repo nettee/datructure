@@ -117,6 +117,12 @@ void main_loop(Network *net)
                 } else {
                     cout << "'all relations': wrong mode" << endl;
                 }
+            } else if (tokens[1] == "friends") {
+                if (mode == USER) {
+                    net->print_all_friends_with(id);
+                } else {
+                    cout << "'all friends':wrong mode" << endl;
+                }
             } else {
                 cout << "all: invalid arguments" << endl;
             }
@@ -148,6 +154,12 @@ void main_loop(Network *net)
                     } else {
                         cout << "'top relations': wrong mode" << endl;
                     }
+                } else if (tokens[1] == "friends") {
+                    if (mode == USER) {
+                        net->print_top_friends_with(id, 3);
+                    } else {
+                        cout << "'top friends': wrong mode" << endl;
+                    }
                 } else {
                     cout << "top: invalid arguments" << endl;
                 }
@@ -173,7 +185,13 @@ void main_loop(Network *net)
                     } else if (mode == CIRCLE) {
                         net->print_top_rel_in_circle(id, n);
                     } else {
-                        cout << "'top relations':wrong mode" << endl;
+                        cout << "'top relations': wrong mode" << endl;
+                    }
+                } else if (tokens[2] == "friends") {
+                    if (mode == USER) {
+                        net->print_top_friends_with(id, n);
+                    } else {
+                        cout << "'top friends': wrong mode" << endl;
                     }
                 } else {
                     cout << "top: invalid arguments" << endl;
