@@ -39,24 +39,6 @@ struct Rel {  // relation
     Rel(): src(-1), dest(-1), closeness(0) {}
     Rel(int a, int b): closeness(1) { src = a; dest = b; }
     Rel(int a, int b, int c) { src = a; dest = b; closeness = c; }
-
-    // overloaded comparison functions for top_relation use
-    bool operator<(const Rel& rhs) const {
-        return closeness < rhs.closeness
-            || closeness == rhs.closeness && src > rhs.src
-            || closeness == rhs.closeness 
-                && src == rhs.src && dest > rhs.dest;
-    }
-    bool operator>(const Rel& rhs) const {
-        return closeness > rhs.closeness
-            || closeness == rhs.closeness && src < rhs.src
-            || closeness == rhs.closeness 
-                && src == rhs.src && dest < rhs.dest;
-    }
-    bool operator==(const Rel& rhs) const {
-        return closeness == rhs.closeness 
-            && src == rhs.src && dest == rhs.dest;
-    }
 };
 
 /* User definition is like Vertex in normal graph */
@@ -155,7 +137,8 @@ public:
 private:
     Vector<User> users;
     Vector<Circle> circles;
-    std::set<Rel> rels;
+    Vector<Rel> rels;
+//    std::set<Rel> rels;
 
     /* search in veritices for given uid, return index of vertex
      * "find" will return -1 if vertex not found
