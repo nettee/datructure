@@ -136,7 +136,7 @@ void main_loop(Network *net)
                     if (mode == GLOBAL) {
                         net->print_top_user(10);
                     } else if (mode == CIRCLE) {
-                        net->print_top_user_in_circle(id, 10);
+                        net->print_top_user_in_circle(id, 3);
                     } else {
                         cout << "'top users': wrong mode" << endl;
                     }

@@ -1,6 +1,8 @@
 #include "network.h"
 #include "vector.h"
+
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -32,6 +34,7 @@ void Network::print_top_user(int n) {
         int activeness = users[i].activeness();
         v.push_back(UserHot(uid, activeness));
     }
+    sort(v.begin(), v.end(), user_hot_compare);
     Vector<UserHot>::const_iterator it = v.begin();
     for (int i = 0; i < n; i++) {
         cout << "user " << it->uid << ": ";
@@ -77,6 +80,7 @@ void Network::print_top_user_in_circle(int cidx, int n) {
         int activeness = users[*it].activeness();
         v.push_back(UserHot(uid, activeness));
     }
+    sort(v.begin(), v.end(), user_hot_compare);
     Vector<UserHot>::const_iterator it = v.begin();
     for (int i = 0; i < n; i++) {
         cout << "user " << it->uid << ": ";
