@@ -1,47 +1,39 @@
+#ifndef __ARRAY_H__
+#define __ARRAY_H__
 /*
  * immutable array
  */
 
-#ifndef __ARRAY_H__
-#define __ARRAY_H__
-
-#include <iostream>
-#include <cassert>
-
 template <typename E>
 class Array {
 public:
+    Array() {
+        data = NULL;
+        siz = 0;
+    }
+
     Array(E *arr, int len) {
-        elements = new E[len];
+        data = new E[len];
         for (int i = 0; i < len; i++) {
-            elements[i] = arr[i];
+            data[i] = arr[i];
         }
         siz = len;
     }
 
     ~Array() {
-        delete[] elements;
+        delete[] data;
     }
 
     int size() {
         return siz;
     }
 
-    E get(int index) {
-        assert(index >= 0 && index < siz);
-        return elements[index];
-    }
-
-    void print() {
-        for (int i = 0; i < siz; i++) {
-            std::cout << elements[i];
-            std::cout << ((i < siz - 1) ? " " : "\n");
-        }
-    }
+    E& operator[](int i) { return data[i]; }
+    const E& operator[](int i) const { return data[i]; }
 
 private:
     int siz;
-    E *elements;
+    E *data;
 };
 
 #endif
