@@ -1,52 +1,53 @@
-#ifndef __STACK_H__
-#define __STACK_H__
+#ifndef _STACK_H_
+#define _STACK_H_
 
-#include <iostream>
 #include <cassert>
+
+template <typename E>
+struct StackNode {
+    E val;
+    StackNode *next;
+    StackNode(E data): next(NULL) { val = data; }
+};
 
 template <typename E>
 class Stack {
 public:
-    Stack() {
-        capacity = 10;
-        elements = new E[capacity];
-        top = 0;
+    Stack() { head = NULL; }
+    ~Stack() { clear(); }
+
+    void clear() {
+        StackNode<E> *p = head;
+        while (p != NULL) {
+            StackNode<E> *q = p;
+            p = p->next;
+            delete q;
+        }
+    }
+
+    bool empty() const { return head == NULL; }
+
+    const E& top() const {
+        assert(!empty());
+        return head->val; 
     }
     
-    ~Stack() {
-        clear();
-        delete[] elements;
+    void push(const E& x) {
+        StackNode<E> *q = new StackNode<E>(x);
+        q->next = head;
+        head = q;
     }
 
-    bool empty() {
-        return top == 0;
-    }
-    
-    E push(E item) {
-        assert(top < capacity);
-        elements[top++] = item;
-        return item;
-    }
-
-    E pop() {
-        assert(top > 0);
-        return elements[--top];
-    }
-
-    E peek() {
-        assert(top > 0);
-        return elements[top - 1];
-    }
-
-protected:
-    clear() {
-        top = 0;
+    void pop(E& x) {
+        assert(!empty());
+        StackNode<E> *q = head;
+        head = head->next;
+        x = q->val;
+        delete q;
     }
 
 private:
-    E *elements;
-    int top;
-    int capacity;
+    StackNode<E> *head;
 };
 
-#endif 
+#endif
