@@ -31,11 +31,13 @@ struct Friend {
     }
 };
 
-struct Rel {  // relation
+/* relation defined for top_relation use */
+struct Rel {  
     int src;
     int dest;
     int closeness;
 
+    // default constructor makes an invalid data
     Rel(): src(-1), dest(-1), closeness(0) {}
     Rel(int a, int b): closeness(1) { src = a; dest = b; }
     Rel(int a, int b, int c) { src = a; dest = b; closeness = c; }
@@ -61,7 +63,7 @@ struct User {
         return acc;
     }
 
-    /* add a friend of id "uid" into friends list.
+    /* add a friends of given index, 
      * return true if a new friend is added
      * return false if friend already exist
      */
@@ -78,6 +80,7 @@ struct User {
         return true;
     }
 
+    /* add closeness of given idx by incr */
     void add_closeness_with(int idx, int incr) {
         for (Friend *f = friends; f != NULL; f = f->next) {
             if (f->dest == idx) {
@@ -99,27 +102,33 @@ public:
     bool add_friends(int uid1, int uid2);
     bool add_closeness(int ater, int atee);
 
+    // simple judgement functions
     int closeness_of(int idx1, int idx2);
     bool are_friends(int uid1, int uid2);
     bool are_friends_by_index(int idx1, int idx2);
 
+    // build graph and initialization
     void build_circle();
     void build_rel();
 
+    // mode transition
     bool enter_user(int uid);
     bool enter_circle(int cid);
 
+    // circle related, implemented in circle.cpp
     void print_articulation();
     void print_circle(int cidx);
     void print_all_circle();
     void print_top_circle(int n);
 
+    // user related, implemented in user.cpp
     void print_user(int idx);
     void print_all_user();
     void print_top_user(int n);
     void print_all_user_in_circle(int cidx);
     void print_top_user_in_circle(int cidx, int n);
 
+    // relation related, implemented in relation.cpp
     void print_rel(const Rel& r);
     void print_all_rel();
     void print_top_rel(int n);

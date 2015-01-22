@@ -6,12 +6,14 @@
 
 using namespace std;
 
+/* to sort circles in decreasing order */
 bool circle_compare(const Circle& c1, const Circle& c2) {
     if (c1.size() > c2.size()) {
         return true;
     } else if (c1.size() < c2.size()) {
         return false;
     } else {
+        // compare first element of both sets
         return *(c1.begin()) > *(c2.begin());
     }
 }
