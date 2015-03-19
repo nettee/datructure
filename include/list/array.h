@@ -9,7 +9,7 @@ class Array {
 public:
     Array() {
         data = NULL;
-        siz = 0;
+        N = 0;
     }
 
     Array(E *arr, int len) {
@@ -17,22 +17,46 @@ public:
         for (int i = 0; i < len; i++) {
             data[i] = arr[i];
         }
-        siz = len;
+        N = len;
+    }
+
+    Array(const Array<E>& rhs) {
+        if (this != &rhs) {
+            N = rhs.N;
+            data = new E[N];
+            for (int i = 0; i < N; i++) {
+                data[i] = rhs.data[i];
+            }
+        }
+    }
+
+    Array<E>& operator=(const Array<E>& rhs) {
+        if (this != &rhs) {
+            N = rhs.N;
+            data = new E[N];
+            for (int i = 0; i < N; i++) {
+                data[i] = rhs.data[i];
+            }
+        }
     }
 
     ~Array() {
         delete[] data;
     }
 
-    int size() {
-        return siz;
+    bool empty() const {
+        return size() == 0;
+    }
+
+    int size() const {
+        return N;
     }
 
     E& operator[](int i) { return data[i]; }
     const E& operator[](int i) const { return data[i]; }
 
 private:
-    int siz;
+    int N;
     E *data;
 };
 
